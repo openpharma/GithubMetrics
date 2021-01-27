@@ -1,0 +1,11 @@
+^.*\.Rproj$
+^\.Rproj\.user$
+^README\.Rmd$
+^LICENSE\.md$
+README-roche.Rmd
+README.Rmd
+README.md
+^Makefile$
+^_pkgdown\.yml$
+^docs$
+^pkgdown$

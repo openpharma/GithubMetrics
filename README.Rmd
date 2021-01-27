@@ -1,0 +1,180 @@
+---
+output: github_document
+---
+
+<!-- README.md is generated from README.Rmd. Please edit that file -->
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  fig.path = "man/figures/README-",
+  out.width = "100%"
+)
+```
+
+# GithubMetrics
+
+<!-- badges: start -->
+<!-- badges: end -->
+
+The aim of this package is to provide a wrapper on `gh` to quickly get you 
+key Github repo information you need.The code here is used within Roche to 
+quickly let me pull answer simple questions like:
+
+* How many studies have more than 1 data scientist (and roughly what's the commit split)
+* What are the common languages being used (proxied through file type distribution within repos)
+* Pull commit metadata to enrich other study info held in other systems
+
+## Installation
+
+You can install the released version of GithubMetrics from [CRAN](https://CRAN.R-project.org) with:
+
+``` r
+install.packages("GithubMetrics")
+```
+
+
+## Setup
+
+```{r setup, warning=FALSE}
+library(GithubMetrics)
+library(tidyverse)
+
+organisation <- "openpharma"
+```
+
+## Repos in an org
+
+Pull all the repos present within an org (that I can see).
+
+```{r}
+repos_raw <- gh_repos_get(
+  org = organisation
+  )
+
+repos_clean <- gh_repos_clean(repos_raw)
+
+glimpse(repos_clean) 
+```
+
+Realistically, research code is likely to be on Github Enterprise, so 
+the `.api_url` and `.token` parameters can be passed through to `gh()`.
+Commented code below shows how you can use an on-premise Github server.
+
+```{r, eval = FALSE}
+# repos_raw <- gh_repos_get(
+#   org = organisation,
+#   .api_url = "https://github.roche.com/api/v3",
+#   .token = Sys.getenv("GITHUB_PAT_ROCHE")
+#   )
+```
+
+## Commits
+
+Get every commit for all the repos in this organisation.
+
+```{r}
+repo_all_commits <- gh_commits_get(
+  repos_clean %>% filter(size > 0) %>% pull(full_name), 
+  days_back = 365*10
+)
+
+glimpse(repo_all_commits)
+```
+
+## Files
+
+Get all of the files present in the last commit of all the repos.
+
+```{r}
+repo_files <- gh_repo_files_get(
+  repo_commits = repo_all_commits,
+  only_last_commit = TRUE
+)
+
+glimpse(repo_files)
+
+repo_files %>%
+  group_by(repo) %>%
+  summarise(
+    Files = n(),
+    `R files` = sum(lang %in% "R"),
+    `Python files` = sum(lang %in% c("Python","Jupyter Notebook"))
+  ) %>% knitr::kable(
+    caption = "Types of files in the organisation"
+  )
+```
+
+```{r}
+results <- gh_repo_search(
+  code = "tidyverse",
+  organisation = organisation
+)
+
+glimpse(results)
+```
+
+```{r, warning=FALSE}
+helper_gh_repo_search <- function(x, org = "openpharma"){
+  
+  ## Slow it down! as search has 30 calls a minute rate limit.
+  ## If you prem the search rate limit is higher, so usually not needed
+  if(interactive()){message("Wait 5 seconds")}
+  Sys.sleep(5)
+  ## End slow down
+  
+  
+   results <- gh_repo_search(
+      code = x,
+      organisation = org
+    ) 
+   
+  if(is.na(results)) {
+    results <- return()
+  }
+  results %>% 
+    mutate(Package = x, Organisation = org) %>%
+    group_by(Organisation,Package) %>%
+    summarise(
+      Repos = n_distinct(full_name), .groups = "drop"
+    )
+}
+
+packages <- c(
+  "tidyverse","pkgdown","dplyr","data.table"
+  )
+
+package_use <- bind_rows(
+  packages %>%
+    map_df(
+      helper_gh_repo_search, org = "openpharma"
+    ),
+  packages %>%
+    map_df(
+      helper_gh_repo_search, org = "AstraZeneca"
+    ),
+  packages %>%
+    map_df(
+      helper_gh_repo_search, org = "Roche"
+    ),
+  packages %>%
+    map_df(
+      helper_gh_repo_search, org = "Genentech"
+    ),
+  packages %>%
+    map_df(
+      helper_gh_repo_search, org = "Novartis"
+    )
+)
+
+
+package_use %>%
+  pivot_wider(names_from = "Package", values_from = "Repos") %>%
+  mutate(Total = rowSums(.[,-1], na.rm = TRUE)) %>%
+  arrange(-Total) %>%
+  knitr::kable(
+    caption = "Package use detected within repositaries in Pharma orgs"
+  )
+```
+

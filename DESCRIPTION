@@ -1,0 +1,21 @@
+Package: GithubMetrics
+Type: Package
+Title: Quickly get key metrics on Github repositaries.
+Version: 0.1.0
+Authors@R: c(person("James", "Black", role = c("aut", "cre"),
+                     email = "james.black.jb2@roche.com"))
+Description: More about what it does (maybe more than one line)
+    Use four spaces when indenting paragraphs within the Description.
+License: MIT + file LICENSE
+Encoding: UTF-8
+LazyData: true
+Imports: 
+    gh (>= 1.2),
+    magrittr,
+    progress,
+    pander,
+    purrr,
+    dplyr,
+    glue,
+    tibble
+RoxygenNote: 7.1.1
