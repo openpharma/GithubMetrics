@@ -64,7 +64,7 @@
 <div class="page-header"><h1 class="hasAnchor">
 <a href="#githubmetrics" class="anchor"></a>GithubMetrics</h1></div>
 <!-- badges: start -->
-<!-- badges: end -->
+
 <p>The aim of this package is to provide a wrapper on <code>gh</code> to quickly get you key Github repo information you need.The code here is used within Roche to quickly let me pull answer simple questions like:</p>
 <ul>
 <li>How many studies have more than 1 data scientist (and roughly what’s the commit split)</li>
@@ -84,12 +84,12 @@
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">GithubMetrics</span><span class="op">)</span>
 <span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="http://tidyverse.tidyverse.org">tidyverse</a></span><span class="op">)</span>
-<span class="co">#&gt; ── Attaching packages ─────────────────────────────────────── tidyverse 1.3.0 ──</span>
+<span class="co">#&gt; ── Attaching packages ─────────────────────────────────────────────────────────── tidyverse 1.3.0 ──</span>
 <span class="co">#&gt; ✓ ggplot2 3.3.3     ✓ purrr   0.3.4</span>
 <span class="co">#&gt; ✓ tibble  3.0.5     ✓ dplyr   1.0.3</span>
 <span class="co">#&gt; ✓ tidyr   1.1.2     ✓ stringr 1.4.0</span>
 <span class="co">#&gt; ✓ readr   1.4.0     ✓ forcats 0.5.0</span>
-<span class="co">#&gt; ── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──</span>
+<span class="co">#&gt; ── Conflicts ────────────────────────────────────────────────────────────── tidyverse_conflicts() ──</span>
 <span class="co">#&gt; x dplyr::filter() masks stats::filter()</span>
 <span class="co">#&gt; x dplyr::lag()    masks stats::lag()</span>
 
@@ -107,15 +107,15 @@
 <span class="va">repos_clean</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/gh_repos_clean.html">gh_repos_clean</a></span><span class="op">(</span><span class="va">repos_raw</span><span class="op">)</span>
 
 <span class="fu">glimpse</span><span class="op">(</span><span class="va">repos_clean</span><span class="op">)</span> 
-<span class="co">#&gt; Rows: 12</span>
+<span class="co">#&gt; Rows: 13</span>
 <span class="co">#&gt; Columns: 7</span>
-<span class="co">#&gt; $ name           &lt;chr&gt; "facetsr", "visR-docs", "sas7bdat", "CTP", "ReadStat",…</span>
-<span class="co">#&gt; $ full_name      &lt;chr&gt; "openpharma/facetsr", "openpharma/visR-docs", "openpha…</span>
-<span class="co">#&gt; $ size           &lt;int&gt; 2163, 5435, 87, 939, 1817, 79487, 329, 0, 482, 28635, …</span>
-<span class="co">#&gt; $ updated_at     &lt;chr&gt; "2020-11-30T12:37:13Z", "2020-09-21T12:23:54Z", "2020-…</span>
+<span class="co">#&gt; $ name           &lt;chr&gt; "GithubMetrics", "facetsr", "visR-docs", "sas7bdat", "…</span>
+<span class="co">#&gt; $ full_name      &lt;chr&gt; "openpharma/GithubMetrics", "openpharma/facetsr", "ope…</span>
+<span class="co">#&gt; $ size           &lt;int&gt; 0, 2163, 5435, 87, 939, 1817, 79487, 329, 0, 482, 2863…</span>
+<span class="co">#&gt; $ updated_at     &lt;chr&gt; "2021-01-27T22:25:48Z", "2020-11-30T12:37:13Z", "2020-…</span>
 <span class="co">#&gt; $ default_branch &lt;chr&gt; "master", "master", "master", "master", "master", "mas…</span>
-<span class="co">#&gt; $ language       &lt;chr&gt; "R", "Unsure", "Python", "R", "C", "R", "R", "Unsure",…</span>
-<span class="co">#&gt; $ MB             &lt;dbl&gt; 2.1, 5.3, 0.1, 0.9, 1.8, 77.6, 0.3, 0.0, 0.5, 28.0, 20…</span></code></pre></div>
+<span class="co">#&gt; $ language       &lt;chr&gt; "R", "R", "Unsure", "Python", "R", "C", "R", "R", "Uns…</span>
+<span class="co">#&gt; $ MB             &lt;dbl&gt; 0.0, 2.1, 5.3, 0.1, 0.9, 1.8, 77.6, 0.3, 0.0, 0.5, 28.…</span></code></pre></div>
 <p>Realistically, research code is likely to be on Github Enterprise, so the <code>.api_url</code> and <code>.token</code> parameters can be passed through to <code>gh()</code>. Commented code below shows how you can use an on-premise Github server.</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># repos_raw &lt;- gh_repos_get(</span>
@@ -133,25 +133,18 @@
   <span class="va">repos_clean</span> <span class="op">%&gt;%</span> <span class="fu"><a href="https://rdrr.io/r/stats/filter.html">filter</a></span><span class="op">(</span><span class="va">size</span> <span class="op">&gt;</span> <span class="fl">0</span><span class="op">)</span> <span class="op">%&gt;%</span> <span class="fu">pull</span><span class="op">(</span><span class="va">full_name</span><span class="op">)</span>, 
   days_back <span class="op">=</span> <span class="fl">365</span><span class="op">*</span><span class="fl">10</span>
 <span class="op">)</span>
-<span class="co">#&gt; ℹ Running gh query</span>
-<span class="co">#&gt; ℹ Running gh query, got 100 records of about 200</span>
-<span class="co">#&gt; ℹ Running gh query</span>
-<span class="co">#&gt; ℹ Running gh query, got 100 records of about 1000</span>
-<span class="co">#&gt; ℹ Running gh query, got 300 records of about 1500</span>
-<span class="co">#&gt; ℹ Running gh query, got 600 records of about 2000</span>
-<span class="co">#&gt; ℹ Running gh query, got 1000 records of about 2500</span>
-<span class="co">#&gt; ℹ Running gh query, got 1500 records of about 3000</span>
-<span class="co">#&gt; ℹ Running gh query, got 2100 records of about 3500</span>
-<span class="co">#&gt; ℹ Running gh query, got 2800 records of about 4000</span>
-<span class="co">#&gt; ℹ Running gh query, got 3600 records of about 4500</span>
-<span class="co">#&gt; ℹ Running gh query, got 4500 records of about 5000</span>
-<span class="co">#&gt; ℹ Running gh query</span>
-<span class="co">#&gt; ℹ Running gh query, got 100 records of about 200</span>
-<span class="co">#&gt; ℹ Running gh query</span>
-<span class="co">#&gt; ℹ Running gh query, got 100 records of about 500</span>
-<span class="co">#&gt; ℹ Running gh query, got 300 records of about 750</span>
-<span class="co">#&gt; ℹ Running gh query, got 600 records of about 1000</span>
-<span class="co">#&gt; ℹ Running gh query, got 1000 records of about 1250</span>
+<span class="co">#&gt; ℹ Running gh query[K ℹ Running gh query, got 100 records of about 200[K [K ℹ</span>
+<span class="co">#&gt; Running gh query[K ℹ Running gh query, got 100 records of about 1000[K ℹ Running</span>
+<span class="co">#&gt; gh query, got 300 records of about 1500[K ℹ Running gh query, got 600 records</span>
+<span class="co">#&gt; of about 2000[K ℹ Running gh query, got 1000 records of about 2500[K ℹ Running</span>
+<span class="co">#&gt; gh query, got 1500 records of about 3000[K ℹ Running gh query, got 2100 records</span>
+<span class="co">#&gt; of about 3500[K ℹ Running gh query, got 2800 records of about 4000[K ℹ Running</span>
+<span class="co">#&gt; gh query, got 3600 records of about 4500[K ℹ Running gh query, got 4500 records</span>
+<span class="co">#&gt; of about 5000[K [K ℹ Running gh query[K ℹ Running gh query, got 100 records of</span>
+<span class="co">#&gt; about 200[K [K ℹ Running gh query[K ℹ Running gh query, got 100 records of about</span>
+<span class="co">#&gt; 500[K ℹ Running gh query, got 300 records of about 750[K ℹ Running gh query, got</span>
+<span class="co">#&gt; 600 records of about 1000[K ℹ Running gh query, got 1000 records of about 1250[K</span>
+<span class="co">#&gt; [K</span>
 
 <span class="fu">glimpse</span><span class="op">(</span><span class="va">repo_all_commits</span><span class="op">)</span>
 <span class="co">#&gt; Rows: 1,739</span>
@@ -172,6 +165,7 @@
   only_last_commit <span class="op">=</span> <span class="cn">TRUE</span>
 <span class="op">)</span>
 <span class="co">#&gt; Pulling files in latest commit from 11 repos</span>
+<span class="co">#&gt;   downloading [====&gt;-------------------------]  18% eta:  2s  downloading [=======&gt;----------------------]  27% eta:  2s  downloading [==========&gt;-------------------]  36% eta:  2s  downloading [=============&gt;----------------]  45% eta:  2s  downloading [===============&gt;--------------]  55% eta:  2s  downloading [==================&gt;-----------]  64% eta:  1s  downloading [=====================&gt;--------]  73% eta:  1s  downloading [========================&gt;-----]  82% eta:  1s  downloading [==========================&gt;---]  91% eta:  0s  downloading [==============================] 100% eta:  0s</span>
 
 <span class="fu">glimpse</span><span class="op">(</span><span class="va">repo_files</span><span class="op">)</span>
 <span class="co">#&gt; Rows: 1,264</span>
@@ -276,15 +270,15 @@
 <span class="op">)</span>
 
 <span class="fu">glimpse</span><span class="op">(</span><span class="va">results</span><span class="op">)</span>
-<span class="co">#&gt; Rows: 8</span>
+<span class="co">#&gt; Rows: 10</span>
 <span class="co">#&gt; Columns: 7</span>
-<span class="co">#&gt; $ full_name &lt;chr&gt; "openpharma/facetsr", "openpharma/facetsr", "openpharma/vis…</span>
-<span class="co">#&gt; $ name      &lt;chr&gt; "facetsr", "facetsr", "visR", "visR", "visR", "simaerep", "…</span>
-<span class="co">#&gt; $ file_name &lt;chr&gt; "README.md", "README.Rmd", "README.md", "utilities.R", "REA…</span>
-<span class="co">#&gt; $ path      &lt;chr&gt; "README.md", "README.Rmd", "README.md", "R/utilities.R", "R…</span>
-<span class="co">#&gt; $ url       &lt;chr&gt; "https://github.com/openpharma/facetsr/blob/cef40b2227f169d…</span>
-<span class="co">#&gt; $ score     &lt;dbl&gt; 1, 1, 1, 1, 1, 1, 1, 1</span>
-<span class="co">#&gt; $ lang      &lt;chr&gt; "Markdown", "R", "Markdown", "R", "R", "R", "R", "R"</span></code></pre></div>
+<span class="co">#&gt; $ full_name &lt;chr&gt; "openpharma/GithubMetrics", "openpharma/GithubMetrics", "op…</span>
+<span class="co">#&gt; $ name      &lt;chr&gt; "GithubMetrics", "GithubMetrics", "facetsr", "facetsr", "vi…</span>
+<span class="co">#&gt; $ file_name &lt;chr&gt; "README.md", "README.Rmd", "README.md", "README.Rmd", "READ…</span>
+<span class="co">#&gt; $ path      &lt;chr&gt; "README.md", "README.Rmd", "README.md", "README.Rmd", "READ…</span>
+<span class="co">#&gt; $ url       &lt;chr&gt; "https://github.com/openpharma/GithubMetrics/blob/5ff1d4aaf…</span>
+<span class="co">#&gt; $ score     &lt;dbl&gt; 1, 1, 1, 1, 1, 1, 1, 1, 1, 1</span>
+<span class="co">#&gt; $ lang      &lt;chr&gt; "Markdown", "R", "Markdown", "R", "Markdown", "R", "R", "R"…</span></code></pre></div>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">helper_gh_repo_search</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">x</span>, <span class="va">org</span> <span class="op">=</span> <span class="st">"openpharma"</span><span class="op">)</span><span class="op">{</span>
   
@@ -343,12 +337,9 @@
 <span class="co">#&gt; query = 'pkgdown in:file  user:AstraZeneca'</span>
 <span class="co">#&gt; data.table does not appear in AstraZeneca.</span>
 <span class="co">#&gt; query = 'data.table in:file  user:AstraZeneca'</span>
-<span class="co">#&gt; ℹ Running gh query</span>
-<span class="co">#&gt; ℹ Running gh query, got 3 records of about 6</span>
-<span class="co">#&gt; ℹ Running gh query</span>
-<span class="co">#&gt; ℹ Running gh query, got 3 records of about 6</span>
-<span class="co">#&gt; ℹ Running gh query</span>
-<span class="co">#&gt; ℹ Running gh query, got 3 records of about 6</span>
+<span class="co">#&gt; ℹ Running gh query[K ℹ Running gh query, got 3 records of about 6[K [K ℹ Running</span>
+<span class="co">#&gt; gh query[K ℹ Running gh query, got 3 records of about 6[K [K ℹ Running gh</span>
+<span class="co">#&gt; query[K ℹ Running gh query, got 3 records of about 6[K [K</span>
 
 
 <span class="va">package_use</span> <span class="op">%&gt;%</span>
@@ -378,11 +369,11 @@
 </tr>
 <tr class="even">
 <td align="left">openpharma</td>
-<td align="right">3</td>
-<td align="right">5</td>
 <td align="right">4</td>
-<td align="right">1</td>
-<td align="right">13</td>
+<td align="right">6</td>
+<td align="right">5</td>
+<td align="right">2</td>
+<td align="right">17</td>
 </tr>
 <tr class="odd">
 <td align="left">Roche</td>
@@ -430,7 +421,13 @@
 </ul>
 </div>
 
-  </div>
+  <div class="dev-status">
+<h2>Dev status</h2>
+<ul class="list-unstyled">
+<li><a href="https://github.com/openpharma/GithubMetrics/actions"><img src="https://github.com/openpharma/GithubMetrics/workflows/R-CMD-check/badge.svg" alt="R-CMD-check"></a></li>
+</ul>
+</div>
+</div>
 </div>
 
 
