@@ -5,6 +5,7 @@
 
 <!-- badges: start -->
 
+[![R-CMD-check](https://github.com/openpharma/GithubMetrics/workflows/R-CMD-check/badge.svg)](https://github.com/openpharma/GithubMetrics/actions)
 <!-- badges: end -->
 
 The aim of this package is to provide a wrapper on `gh` to quickly get
@@ -32,12 +33,12 @@ install.packages("GithubMetrics")
 ``` r
 library(GithubMetrics)
 library(tidyverse)
-#> ── Attaching packages ─────────────────────────────────────── tidyverse 1.3.0 ──
+#> ── Attaching packages ─────────────────────────────────────────────────────────── tidyverse 1.3.0 ──
 #> ✓ ggplot2 3.3.3     ✓ purrr   0.3.4
 #> ✓ tibble  3.0.5     ✓ dplyr   1.0.3
 #> ✓ tidyr   1.1.2     ✓ stringr 1.4.0
 #> ✓ readr   1.4.0     ✓ forcats 0.5.0
-#> ── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
+#> ── Conflicts ────────────────────────────────────────────────────────────── tidyverse_conflicts() ──
 #> x dplyr::filter() masks stats::filter()
 #> x dplyr::lag()    masks stats::lag()
 
@@ -56,15 +57,15 @@ repos_raw <- gh_repos_get(
 repos_clean <- gh_repos_clean(repos_raw)
 
 glimpse(repos_clean) 
-#> Rows: 12
+#> Rows: 13
 #> Columns: 7
-#> $ name           <chr> "facetsr", "visR-docs", "sas7bdat", "CTP", "ReadStat",…
-#> $ full_name      <chr> "openpharma/facetsr", "openpharma/visR-docs", "openpha…
-#> $ size           <int> 2163, 5435, 87, 939, 1817, 79487, 329, 0, 482, 28635, …
-#> $ updated_at     <chr> "2020-11-30T12:37:13Z", "2020-09-21T12:23:54Z", "2020-…
+#> $ name           <chr> "GithubMetrics", "facetsr", "visR-docs", "sas7bdat", "…
+#> $ full_name      <chr> "openpharma/GithubMetrics", "openpharma/facetsr", "ope…
+#> $ size           <int> 0, 2163, 5435, 87, 939, 1817, 79487, 329, 0, 482, 2863…
+#> $ updated_at     <chr> "2021-01-27T22:25:48Z", "2020-11-30T12:37:13Z", "2020-…
 #> $ default_branch <chr> "master", "master", "master", "master", "master", "mas…
-#> $ language       <chr> "R", "Unsure", "Python", "R", "C", "R", "R", "Unsure",…
-#> $ MB             <dbl> 2.1, 5.3, 0.1, 0.9, 1.8, 77.6, 0.3, 0.0, 0.5, 28.0, 20…
+#> $ language       <chr> "R", "R", "Unsure", "Python", "R", "C", "R", "R", "Uns…
+#> $ MB             <dbl> 0.0, 2.1, 5.3, 0.1, 0.9, 1.8, 77.6, 0.3, 0.0, 0.5, 28.…
 ```
 
 Realistically, research code is likely to be on Github Enterprise, so
@@ -88,25 +89,18 @@ repo_all_commits <- gh_commits_get(
   repos_clean %>% filter(size > 0) %>% pull(full_name), 
   days_back = 365*10
 )
-#> ℹ Running gh query
-#> ℹ Running gh query, got 100 records of about 200
-#> ℹ Running gh query
-#> ℹ Running gh query, got 100 records of about 1000
-#> ℹ Running gh query, got 300 records of about 1500
-#> ℹ Running gh query, got 600 records of about 2000
-#> ℹ Running gh query, got 1000 records of about 2500
-#> ℹ Running gh query, got 1500 records of about 3000
-#> ℹ Running gh query, got 2100 records of about 3500
-#> ℹ Running gh query, got 2800 records of about 4000
-#> ℹ Running gh query, got 3600 records of about 4500
-#> ℹ Running gh query, got 4500 records of about 5000
-#> ℹ Running gh query
-#> ℹ Running gh query, got 100 records of about 200
-#> ℹ Running gh query
-#> ℹ Running gh query, got 100 records of about 500
-#> ℹ Running gh query, got 300 records of about 750
-#> ℹ Running gh query, got 600 records of about 1000
-#> ℹ Running gh query, got 1000 records of about 1250
+#> ℹ Running gh query[K ℹ Running gh query, got 100 records of about 200[K [K ℹ
+#> Running gh query[K ℹ Running gh query, got 100 records of about 1000[K ℹ Running
+#> gh query, got 300 records of about 1500[K ℹ Running gh query, got 600 records
+#> of about 2000[K ℹ Running gh query, got 1000 records of about 2500[K ℹ Running
+#> gh query, got 1500 records of about 3000[K ℹ Running gh query, got 2100 records
+#> of about 3500[K ℹ Running gh query, got 2800 records of about 4000[K ℹ Running
+#> gh query, got 3600 records of about 4500[K ℹ Running gh query, got 4500 records
+#> of about 5000[K [K ℹ Running gh query[K ℹ Running gh query, got 100 records of
+#> about 200[K [K ℹ Running gh query[K ℹ Running gh query, got 100 records of about
+#> 500[K ℹ Running gh query, got 300 records of about 750[K ℹ Running gh query, got
+#> 600 records of about 1000[K ℹ Running gh query, got 1000 records of about 1250[K
+#> [K
 
 glimpse(repo_all_commits)
 #> Rows: 1,739
@@ -128,6 +122,7 @@ repo_files <- gh_repo_files_get(
   only_last_commit = TRUE
 )
 #> Pulling files in latest commit from 11 repos
+#>   downloading [====>-------------------------]  18% eta:  2s  downloading [=======>----------------------]  27% eta:  2s  downloading [==========>-------------------]  36% eta:  2s  downloading [=============>----------------]  45% eta:  2s  downloading [===============>--------------]  55% eta:  2s  downloading [==================>-----------]  64% eta:  1s  downloading [=====================>--------]  73% eta:  1s  downloading [========================>-----]  82% eta:  1s  downloading [==========================>---]  91% eta:  0s  downloading [==============================] 100% eta:  0s
 
 glimpse(repo_files)
 #> Rows: 1,264
@@ -173,15 +168,15 @@ results <- gh_repo_search(
 )
 
 glimpse(results)
-#> Rows: 8
+#> Rows: 10
 #> Columns: 7
-#> $ full_name <chr> "openpharma/facetsr", "openpharma/facetsr", "openpharma/vis…
-#> $ name      <chr> "facetsr", "facetsr", "visR", "visR", "visR", "simaerep", "…
-#> $ file_name <chr> "README.md", "README.Rmd", "README.md", "utilities.R", "REA…
-#> $ path      <chr> "README.md", "README.Rmd", "README.md", "R/utilities.R", "R…
-#> $ url       <chr> "https://github.com/openpharma/facetsr/blob/cef40b2227f169d…
-#> $ score     <dbl> 1, 1, 1, 1, 1, 1, 1, 1
-#> $ lang      <chr> "Markdown", "R", "Markdown", "R", "R", "R", "R", "R"
+#> $ full_name <chr> "openpharma/GithubMetrics", "openpharma/GithubMetrics", "op…
+#> $ name      <chr> "GithubMetrics", "GithubMetrics", "facetsr", "facetsr", "vi…
+#> $ file_name <chr> "README.md", "README.Rmd", "README.md", "README.Rmd", "READ…
+#> $ path      <chr> "README.md", "README.Rmd", "README.md", "README.Rmd", "READ…
+#> $ url       <chr> "https://github.com/openpharma/GithubMetrics/blob/5ff1d4aaf…
+#> $ score     <dbl> 1, 1, 1, 1, 1, 1, 1, 1, 1, 1
+#> $ lang      <chr> "Markdown", "R", "Markdown", "R", "Markdown", "R", "R", "R"…
 ```
 
 ``` r
@@ -242,12 +237,9 @@ package_use <- bind_rows(
 #> query = 'pkgdown in:file  user:AstraZeneca'
 #> data.table does not appear in AstraZeneca.
 #> query = 'data.table in:file  user:AstraZeneca'
-#> ℹ Running gh query
-#> ℹ Running gh query, got 3 records of about 6
-#> ℹ Running gh query
-#> ℹ Running gh query, got 3 records of about 6
-#> ℹ Running gh query
-#> ℹ Running gh query, got 3 records of about 6
+#> ℹ Running gh query[K ℹ Running gh query, got 3 records of about 6[K [K ℹ Running
+#> gh query[K ℹ Running gh query, got 3 records of about 6[K [K ℹ Running gh
+#> query[K ℹ Running gh query, got 3 records of about 6[K [K
 
 
 package_use %>%
@@ -262,7 +254,7 @@ package_use %>%
 | Organisation | tidyverse | pkgdown | dplyr | data.table | Total |
 | :----------- | --------: | ------: | ----: | ---------: | ----: |
 | Novartis     |         4 |       5 |    10 |         12 |    31 |
-| openpharma   |         3 |       5 |     4 |          1 |    13 |
+| openpharma   |         4 |       6 |     5 |          2 |    17 |
 | Roche        |         3 |       3 |     2 |          3 |    11 |
 | Genentech    |         3 |       2 |     3 |          3 |    11 |
 | AstraZeneca  |        NA |      NA |     1 |         NA |     1 |
