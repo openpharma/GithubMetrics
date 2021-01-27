@@ -8,5 +8,4 @@ PKGVERS = `sed -n "s/Version: *\([^ ]*\)/\1/p" DESCRIPTION`
 
 build:
 	Rscript  -e "rmarkdown::render('README.Rmd')"
-	Rscript  -e "pkgdown::build_site()"
-	Rscript -e "pkgdown::deploy_to_branch(remote = "github")"
+	Rscript -e "pkgdown::deploy_to_branch()"
