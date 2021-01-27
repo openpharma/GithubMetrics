@@ -6,21 +6,7 @@ PKGNAME = `sed -n "s/Package: *\([^ ]*\)/\1/p" DESCRIPTION`
 PKGVERS = `sed -n "s/Version: *\([^ ]*\)/\1/p" DESCRIPTION`
 
 
-all: check
-
-build: install_deps
-	R CMD build .
-
-check: build
-	R CMD check --no-manual $(PKGNAME)_$(PKGVERS).tar.gz
-
-install_deps:
-	Rscript \
-	-e 'if (!requireNamespace("remotes")) install.packages("remotes")' \
-	-e 'remotes::install_deps(dependencies = TRUE)'
-
-install: build
-	R CMD INSTALL $(PKGNAME)_$(PKGVERS).tar.gz
-
-clean:
-	@rm -rf $(PKGNAME)_$(PKGVERS).tar.gz $(PKGNAME).Rcheck
+build:
+	Rscript  -e "rmarkdown::render('README.Rmd')"
+	Rscript  -e "pkgdown::build_site()"
+	Rscript -e "pkgdown::deploy_to_branch(remote = "github")"
