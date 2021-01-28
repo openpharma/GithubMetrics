@@ -4,7 +4,7 @@
 # GithubMetrics
 
 <!-- badges: start -->
-[![R build status](https://github.com/openpharma/GithubMetrics/workflows/R-CMD-check/badge.svg){target='_blank'}](https://github.com/openpharma/GithubMetrics/actions)
+[![R build status](https://github.com/openpharma/GithubMetrics/workflows/R-CMD-check/badge.svg)](https://github.com/openpharma/GithubMetrics/actions)
 <!-- badges: end -->
 
 The aim of this package is to provide a wrapper on `gh` to quickly get
