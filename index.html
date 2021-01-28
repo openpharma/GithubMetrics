@@ -5,13 +5,13 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Quickly get key metrics on Github repositaries. • GithubMetrics</title>
+<title>Quickly get key metrics on Github repositaries • GithubMetrics</title>
 <!-- jquery --><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script><!-- Bootstrap --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha256-bZLfwXAP04zRMK2BjiO8iu9pf4FbLqX6zitd+tIvLhE=" crossorigin="anonymous">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha256-nuL8/2cJ5NDSSwnKD8VqreErSWHtnEP9E7AySL+1ev4=" crossorigin="anonymous"></script><!-- bootstrap-toc --><link rel="stylesheet" href="bootstrap-toc.css">
 <script src="bootstrap-toc.js"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous">
 <!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- pkgdown --><link href="pkgdown.css" rel="stylesheet">
-<script src="pkgdown.js"></script><meta property="og:title" content="Quickly get key metrics on Github repositaries.">
+<script src="pkgdown.js"></script><meta property="og:title" content="Quickly get key metrics on Github repositaries">
 <meta property="og:description" content="More about what it does (maybe more than one line)
     Use four spaces when indenting paragraphs within the Description.">
 <!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/config/TeX-AMS-MML_HTMLorMML.js" integrity="sha256-84DKXVJXs0/F8OTMzX4UR909+jtl4G7SPypPavF+GfA=" crossorigin="anonymous"></script><!--[if lt IE 9]>
@@ -107,15 +107,15 @@
 <span class="va">repos_clean</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/gh_repos_clean.html">gh_repos_clean</a></span><span class="op">(</span><span class="va">repos_raw</span><span class="op">)</span>
 
 <span class="fu">glimpse</span><span class="op">(</span><span class="va">repos_clean</span><span class="op">)</span> 
-<span class="co">#&gt; Rows: 13</span>
+<span class="co">#&gt; Rows: 14</span>
 <span class="co">#&gt; Columns: 7</span>
-<span class="co">#&gt; $ name           &lt;chr&gt; "GithubMetrics", "facetsr", "visR-docs", "sas7bdat", "…</span>
-<span class="co">#&gt; $ full_name      &lt;chr&gt; "openpharma/GithubMetrics", "openpharma/facetsr", "ope…</span>
-<span class="co">#&gt; $ size           &lt;int&gt; 0, 2163, 5435, 87, 939, 1817, 79487, 329, 0, 482, 2863…</span>
-<span class="co">#&gt; $ updated_at     &lt;chr&gt; "2021-01-27T22:25:48Z", "2020-11-30T12:37:13Z", "2020-…</span>
-<span class="co">#&gt; $ default_branch &lt;chr&gt; "master", "master", "master", "master", "master", "mas…</span>
-<span class="co">#&gt; $ language       &lt;chr&gt; "R", "R", "Unsure", "Python", "R", "C", "R", "R", "Uns…</span>
-<span class="co">#&gt; $ MB             &lt;dbl&gt; 0.0, 2.1, 5.3, 0.1, 0.9, 1.8, 77.6, 0.3, 0.0, 0.5, 28.…</span></code></pre></div>
+<span class="co">#&gt; $ name           &lt;chr&gt; "BBS-causality-training", "GithubMetrics", "facetsr", …</span>
+<span class="co">#&gt; $ full_name      &lt;chr&gt; "openpharma/BBS-causality-training", "openpharma/Githu…</span>
+<span class="co">#&gt; $ size           &lt;int&gt; 0, 55, 2163, 5435, 87, 939, 1817, 79487, 329, 0, 482, …</span>
+<span class="co">#&gt; $ updated_at     &lt;chr&gt; "2021-01-28T18:44:27Z", "2021-01-28T08:02:24Z", "2020-…</span>
+<span class="co">#&gt; $ default_branch &lt;chr&gt; "main", "master", "master", "master", "master", "maste…</span>
+<span class="co">#&gt; $ language       &lt;chr&gt; "Unsure", "R", "R", "Unsure", "Python", "R", "C", "R",…</span>
+<span class="co">#&gt; $ MB             &lt;dbl&gt; 0.0, 0.1, 2.1, 5.3, 0.1, 0.9, 1.8, 77.6, 0.3, 0.0, 0.5…</span></code></pre></div>
 <p>Realistically, research code is likely to be on Github Enterprise, so the <code>.api_url</code> and <code>.token</code> parameters can be passed through to <code>gh()</code>. Commented code below shows how you can use an on-premise Github server.</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># repos_raw &lt;- gh_repos_get(</span>
@@ -147,13 +147,13 @@
 <span class="co">#&gt; [K</span>
 
 <span class="fu">glimpse</span><span class="op">(</span><span class="va">repo_all_commits</span><span class="op">)</span>
-<span class="co">#&gt; Rows: 1,739</span>
+<span class="co">#&gt; Rows: 1,747</span>
 <span class="co">#&gt; Columns: 5</span>
-<span class="co">#&gt; $ full_name      &lt;chr&gt; "openpharma/facetsr", "openpharma/visR-docs", "openpha…</span>
-<span class="co">#&gt; $ author         &lt;chr&gt; "galachad", "Jonnie-Bevan", "actions-user", "actions-u…</span>
-<span class="co">#&gt; $ datetime       &lt;chr&gt; "2020-11-30T11:40:03Z", "2020-09-21T09:45:33Z", "2020-…</span>
-<span class="co">#&gt; $ sha            &lt;chr&gt; "cef40b2227f169d4caa8b8936f0ae25b76f2b53f", "5b35fdbc3…</span>
-<span class="co">#&gt; $ commit_message &lt;chr&gt; "Opensource init relese", "Update README.md", "Publish…</span></code></pre></div>
+<span class="co">#&gt; $ full_name      &lt;chr&gt; "openpharma/GithubMetrics", "openpharma/GithubMetrics"…</span>
+<span class="co">#&gt; $ author         &lt;chr&gt; "epijim", "epijim", "epijim", "epijim", "epijim", "epi…</span>
+<span class="co">#&gt; $ datetime       &lt;chr&gt; "2021-01-28T08:02:23Z", "2021-01-28T08:02:09Z", "2021-…</span>
+<span class="co">#&gt; $ sha            &lt;chr&gt; "fc4cc4a9458521c7bdbec7ccf9cad1f0d083f143", "84cb0a8c3…</span>
+<span class="co">#&gt; $ commit_message &lt;chr&gt; "Update README.md", "Update README.md", "try new githu…</span></code></pre></div>
 </div>
 <div id="files" class="section level2">
 <h2 class="hasAnchor">
@@ -164,11 +164,11 @@
   repo_commits <span class="op">=</span> <span class="va">repo_all_commits</span>,
   only_last_commit <span class="op">=</span> <span class="cn">TRUE</span>
 <span class="op">)</span>
-<span class="co">#&gt; Pulling files in latest commit from 11 repos</span>
-<span class="co">#&gt;   downloading [====&gt;-------------------------]  18% eta:  2s  downloading [=======&gt;----------------------]  27% eta:  2s  downloading [==========&gt;-------------------]  36% eta:  2s  downloading [=============&gt;----------------]  45% eta:  2s  downloading [===============&gt;--------------]  55% eta:  2s  downloading [==================&gt;-----------]  64% eta:  1s  downloading [=====================&gt;--------]  73% eta:  1s  downloading [========================&gt;-----]  82% eta:  1s  downloading [==========================&gt;---]  91% eta:  0s  downloading [==============================] 100% eta:  0s</span>
+<span class="co">#&gt; Pulling files in latest commit from 12 repos</span>
+<span class="co">#&gt;   downloading [====&gt;-------------------------]  17% eta:  4s  downloading [=======&gt;----------------------]  25% eta:  4s  downloading [=========&gt;--------------------]  33% eta:  3s  downloading [===========&gt;------------------]  42% eta:  3s  downloading [==============&gt;---------------]  50% eta:  3s  downloading [=================&gt;------------]  58% eta:  2s  downloading [===================&gt;----------]  67% eta:  2s  downloading [=====================&gt;--------]  75% eta:  1s  downloading [========================&gt;-----]  83% eta:  1s  downloading [===========================&gt;--]  92% eta:  0s  downloading [==============================] 100% eta:  0s</span>
 
 <span class="fu">glimpse</span><span class="op">(</span><span class="va">repo_files</span><span class="op">)</span>
-<span class="co">#&gt; Rows: 1,264</span>
+<span class="co">#&gt; Rows: 1,294</span>
 <span class="co">#&gt; Columns: 6</span>
 <span class="co">#&gt; $ repo       &lt;chr&gt; "openpharma/visR-docs", "openpharma/visR-docs", "openpharm…</span>
 <span class="co">#&gt; $ file       &lt;chr&gt; "readme.md", "docs", "docs/404.html", "docs/code_of_conduc…</span>
@@ -207,54 +207,60 @@
 <td align="right">0</td>
 </tr>
 <tr class="odd">
+<td align="left">openpharma/GithubMetrics</td>
+<td align="right">30</td>
+<td align="right">17</td>
+<td align="right">0</td>
+</tr>
+<tr class="even">
 <td align="left">openpharma/openpharma.github.io</td>
 <td align="right">76</td>
 <td align="right">1</td>
 <td align="right">0</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td align="left">openpharma/pypharma_nlp</td>
 <td align="right">131</td>
 <td align="right">0</td>
 <td align="right">49</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td align="left">openpharma/RDO</td>
 <td align="right">105</td>
 <td align="right">11</td>
 <td align="right">0</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td align="left">openpharma/ReadStat</td>
 <td align="right">207</td>
 <td align="right">0</td>
 <td align="right">0</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td align="left">openpharma/sas7bdat</td>
 <td align="right">8</td>
 <td align="right">0</td>
 <td align="right">2</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td align="left">openpharma/simaerep</td>
 <td align="right">145</td>
 <td align="right">32</td>
 <td align="right">0</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td align="left">openpharma/syntrial</td>
 <td align="right">67</td>
 <td align="right">24</td>
 <td align="right">0</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td align="left">openpharma/visR</td>
 <td align="right">177</td>
 <td align="right">81</td>
 <td align="right">0</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td align="left">openpharma/visR-docs</td>
 <td align="right">185</td>
 <td align="right">0</td>
@@ -276,7 +282,7 @@
 <span class="co">#&gt; $ name      &lt;chr&gt; "GithubMetrics", "GithubMetrics", "facetsr", "facetsr", "vi…</span>
 <span class="co">#&gt; $ file_name &lt;chr&gt; "README.md", "README.Rmd", "README.md", "README.Rmd", "READ…</span>
 <span class="co">#&gt; $ path      &lt;chr&gt; "README.md", "README.Rmd", "README.md", "README.Rmd", "READ…</span>
-<span class="co">#&gt; $ url       &lt;chr&gt; "https://github.com/openpharma/GithubMetrics/blob/5ff1d4aaf…</span>
+<span class="co">#&gt; $ url       &lt;chr&gt; "https://github.com/openpharma/GithubMetrics/blob/fc4cc4a94…</span>
 <span class="co">#&gt; $ score     &lt;dbl&gt; 1, 1, 1, 1, 1, 1, 1, 1, 1, 1</span>
 <span class="co">#&gt; $ lang      &lt;chr&gt; "Markdown", "R", "Markdown", "R", "Markdown", "R", "R", "R"…</span></code></pre></div>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
@@ -425,6 +431,7 @@
 <h2>Dev status</h2>
 <ul class="list-unstyled">
 <li><a href="https://github.com/openpharma/GithubMetrics/actions"><img src="https://github.com/openpharma/GithubMetrics/workflows/R-CMD-check/badge.svg" alt="R-CMD-check"></a></li>
+<li><a href="https://codecov.io/gh/openpharma/GithubMetrics?branch=master"><img src="https://codecov.io/gh/openpharma/GithubMetrics/branch/master/graph/badge.svg" alt="Codecov test coverage"></a></li>
 </ul>
 </div>
 </div>
