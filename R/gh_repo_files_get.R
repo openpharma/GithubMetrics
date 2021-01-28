@@ -55,7 +55,7 @@ gh_repo_files_get <- function(
     )
 
   for(i in 1:nrow(d_input)){
-    pb$tick()
+    if (interactive()) pb$tick()
     i_data <- d_input[i,]
 
     i <- i_data$full_name
@@ -66,6 +66,7 @@ gh_repo_files_get <- function(
       full_name = i,
       sha = sha_repo,
       .limit = Inf,
+      .progress = FALSE,
       ...
     )$tree$sha
 
@@ -74,6 +75,7 @@ gh_repo_files_get <- function(
       full_name = i,
       sha = sha,
       .limit = Inf,
+      .progress = FALSE,
       ...
       )$tree %>%
       purrr::map_chr("path") %>%

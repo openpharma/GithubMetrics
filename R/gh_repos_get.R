@@ -26,6 +26,7 @@ gh_repos_get <- function(
   user_orgs <-
     gh::gh("/user/orgs",
            .limit = Inf,
+           .progress = FALSE,
            ...
     )
 
@@ -44,6 +45,7 @@ gh_repos_get <- function(
     gh::gh("/orgs/:org/repos",
            org = org,
            .limit = Inf,
+           .progress = FALSE,
            ...)
 
 

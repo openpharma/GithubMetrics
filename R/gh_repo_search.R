@@ -48,6 +48,7 @@ gh_repo_search <- function(
     "/search/code",
     q = query,
     .limit = Inf,
+    .progress = FALSE,
     ...
   )
 

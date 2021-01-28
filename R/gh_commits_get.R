@@ -73,6 +73,7 @@ repo_commits <- function(
                     full_name = full_name,
                     since = since,
                     .limit = Inf,
+                    .progress = FALSE,
                     ...
   )
 
