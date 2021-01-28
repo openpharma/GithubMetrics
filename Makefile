@@ -5,7 +5,14 @@
 PKGNAME = `sed -n "s/Package: *\([^ ]*\)/\1/p" DESCRIPTION`
 PKGVERS = `sed -n "s/Version: *\([^ ]*\)/\1/p" DESCRIPTION`
 
+.PHONY: all build deploy
+
+all: build deploy
 
 build:
+	R CMD INSTALL --no-multiarch --with-keep.source ../GithubMetrics
+	Rscript  -e "devtools::document()"
 	Rscript  -e "rmarkdown::render('README.Rmd', output_format = 'github_document')"
+
+deploy:
 	Rscript -e "pkgdown::deploy_to_branch()"
