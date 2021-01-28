@@ -64,7 +64,7 @@ glimpse(repos_clean)
 #> $ name           <chr> "BBS-causality-training", "GithubMetrics", "facetsr", …
 #> $ full_name      <chr> "openpharma/BBS-causality-training", "openpharma/Githu…
 #> $ size           <int> 0, 55, 2163, 5435, 87, 939, 1817, 79487, 329, 0, 482, …
-#> $ updated_at     <chr> "2021-01-28T18:44:27Z", "2021-01-28T08:02:24Z", "2020-…
+#> $ updated_at     <chr> "2021-01-28T18:44:27Z", "2021-01-28T20:49:09Z", "2020-…
 #> $ default_branch <chr> "main", "master", "master", "master", "master", "maste…
 #> $ language       <chr> "Unsure", "R", "R", "Unsure", "Python", "R", "C", "R",…
 #> $ MB             <dbl> 0.0, 0.1, 2.1, 5.3, 0.1, 0.9, 1.8, 77.6, 0.3, 0.0, 0.5…
@@ -91,18 +91,6 @@ repo_all_commits <- gh_commits_get(
   repos_clean %>% filter(size > 0) %>% pull(full_name), 
   days_back = 365*10
 )
-#> ℹ Running gh query[K ℹ Running gh query, got 100 records of about 200[K [K ℹ
-#> Running gh query[K ℹ Running gh query, got 100 records of about 1000[K ℹ Running
-#> gh query, got 300 records of about 1500[K ℹ Running gh query, got 600 records
-#> of about 2000[K ℹ Running gh query, got 1000 records of about 2500[K ℹ Running
-#> gh query, got 1500 records of about 3000[K ℹ Running gh query, got 2100 records
-#> of about 3500[K ℹ Running gh query, got 2800 records of about 4000[K ℹ Running
-#> gh query, got 3600 records of about 4500[K ℹ Running gh query, got 4500 records
-#> of about 5000[K [K ℹ Running gh query[K ℹ Running gh query, got 100 records of
-#> about 200[K [K ℹ Running gh query[K ℹ Running gh query, got 100 records of about
-#> 500[K ℹ Running gh query, got 300 records of about 750[K ℹ Running gh query, got
-#> 600 records of about 1000[K ℹ Running gh query, got 1000 records of about 1250[K
-#> [K
 
 glimpse(repo_all_commits)
 #> Rows: 1,747
@@ -124,7 +112,6 @@ repo_files <- gh_repo_files_get(
   only_last_commit = TRUE
 )
 #> Pulling files in latest commit from 12 repos
-#>   downloading [====>-------------------------]  17% eta:  4s  downloading [=======>----------------------]  25% eta:  4s  downloading [=========>--------------------]  33% eta:  3s  downloading [===========>------------------]  42% eta:  3s  downloading [==============>---------------]  50% eta:  3s  downloading [=================>------------]  58% eta:  2s  downloading [===================>----------]  67% eta:  2s  downloading [=====================>--------]  75% eta:  1s  downloading [========================>-----]  83% eta:  1s  downloading [===========================>--]  92% eta:  0s  downloading [==============================] 100% eta:  0s
 
 glimpse(repo_files)
 #> Rows: 1,294
@@ -240,9 +227,6 @@ package_use <- bind_rows(
 #> query = 'pkgdown in:file  user:AstraZeneca'
 #> data.table does not appear in AstraZeneca.
 #> query = 'data.table in:file  user:AstraZeneca'
-#> ℹ Running gh query[K ℹ Running gh query, got 3 records of about 6[K [K ℹ Running
-#> gh query[K ℹ Running gh query, got 3 records of about 6[K [K ℹ Running gh
-#> query[K ℹ Running gh query, got 3 records of about 6[K [K
 
 
 package_use %>%
