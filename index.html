@@ -112,7 +112,7 @@
 <span class="co">#&gt; $ name           &lt;chr&gt; "BBS-causality-training", "GithubMetrics", "facetsr", …</span>
 <span class="co">#&gt; $ full_name      &lt;chr&gt; "openpharma/BBS-causality-training", "openpharma/Githu…</span>
 <span class="co">#&gt; $ size           &lt;int&gt; 0, 55, 2163, 5435, 87, 939, 1817, 79487, 329, 0, 482, …</span>
-<span class="co">#&gt; $ updated_at     &lt;chr&gt; "2021-01-28T18:44:27Z", "2021-01-28T20:39:33Z", "2020-…</span>
+<span class="co">#&gt; $ updated_at     &lt;chr&gt; "2021-01-28T18:44:27Z", "2021-01-28T20:49:09Z", "2020-…</span>
 <span class="co">#&gt; $ default_branch &lt;chr&gt; "main", "master", "master", "master", "master", "maste…</span>
 <span class="co">#&gt; $ language       &lt;chr&gt; "Unsure", "R", "R", "Unsure", "Python", "R", "C", "R",…</span>
 <span class="co">#&gt; $ MB             &lt;dbl&gt; 0.0, 0.1, 2.1, 5.3, 0.1, 0.9, 1.8, 77.6, 0.3, 0.0, 0.5…</span></code></pre></div>
@@ -133,18 +133,6 @@
   <span class="va">repos_clean</span> <span class="op">%&gt;%</span> <span class="fu"><a href="https://rdrr.io/r/stats/filter.html">filter</a></span><span class="op">(</span><span class="va">size</span> <span class="op">&gt;</span> <span class="fl">0</span><span class="op">)</span> <span class="op">%&gt;%</span> <span class="fu">pull</span><span class="op">(</span><span class="va">full_name</span><span class="op">)</span>, 
   days_back <span class="op">=</span> <span class="fl">365</span><span class="op">*</span><span class="fl">10</span>
 <span class="op">)</span>
-<span class="co">#&gt; ℹ Running gh query[K ℹ Running gh query, got 100 records of about 200[K [K ℹ</span>
-<span class="co">#&gt; Running gh query[K ℹ Running gh query, got 100 records of about 1000[K ℹ Running</span>
-<span class="co">#&gt; gh query, got 300 records of about 1500[K ℹ Running gh query, got 600 records</span>
-<span class="co">#&gt; of about 2000[K ℹ Running gh query, got 1000 records of about 2500[K ℹ Running</span>
-<span class="co">#&gt; gh query, got 1500 records of about 3000[K ℹ Running gh query, got 2100 records</span>
-<span class="co">#&gt; of about 3500[K ℹ Running gh query, got 2800 records of about 4000[K ℹ Running</span>
-<span class="co">#&gt; gh query, got 3600 records of about 4500[K ℹ Running gh query, got 4500 records</span>
-<span class="co">#&gt; of about 5000[K [K ℹ Running gh query[K ℹ Running gh query, got 100 records of</span>
-<span class="co">#&gt; about 200[K [K ℹ Running gh query[K ℹ Running gh query, got 100 records of about</span>
-<span class="co">#&gt; 500[K ℹ Running gh query, got 300 records of about 750[K ℹ Running gh query, got</span>
-<span class="co">#&gt; 600 records of about 1000[K ℹ Running gh query, got 1000 records of about 1250[K</span>
-<span class="co">#&gt; [K</span>
 
 <span class="fu">glimpse</span><span class="op">(</span><span class="va">repo_all_commits</span><span class="op">)</span>
 <span class="co">#&gt; Rows: 1,747</span>
@@ -165,7 +153,6 @@
   only_last_commit <span class="op">=</span> <span class="cn">TRUE</span>
 <span class="op">)</span>
 <span class="co">#&gt; Pulling files in latest commit from 12 repos</span>
-<span class="co">#&gt;   downloading [====&gt;-------------------------]  17% eta:  2s  downloading [=======&gt;----------------------]  25% eta:  3s  downloading [=========&gt;--------------------]  33% eta:  3s  downloading [===========&gt;------------------]  42% eta:  3s  downloading [==============&gt;---------------]  50% eta:  3s  downloading [=================&gt;------------]  58% eta:  2s  downloading [===================&gt;----------]  67% eta:  2s  downloading [=====================&gt;--------]  75% eta:  1s  downloading [========================&gt;-----]  83% eta:  1s  downloading [===========================&gt;--]  92% eta:  0s  downloading [==============================] 100% eta:  0s</span>
 
 <span class="fu">glimpse</span><span class="op">(</span><span class="va">repo_files</span><span class="op">)</span>
 <span class="co">#&gt; Rows: 1,294</span>
@@ -343,9 +330,6 @@
 <span class="co">#&gt; query = 'pkgdown in:file  user:AstraZeneca'</span>
 <span class="co">#&gt; data.table does not appear in AstraZeneca.</span>
 <span class="co">#&gt; query = 'data.table in:file  user:AstraZeneca'</span>
-<span class="co">#&gt; ℹ Running gh query[K ℹ Running gh query, got 3 records of about 6[K [K ℹ Running</span>
-<span class="co">#&gt; gh query[K ℹ Running gh query, got 3 records of about 6[K [K ℹ Running gh</span>
-<span class="co">#&gt; query[K ℹ Running gh query, got 3 records of about 6[K [K</span>
 
 
 <span class="va">package_use</span> <span class="op">%&gt;%</span>
