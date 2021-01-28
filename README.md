@@ -6,6 +6,8 @@
 <!-- badges: start -->
 
 [![R-CMD-check](https://github.com/openpharma/GithubMetrics/workflows/R-CMD-check/badge.svg)](https://github.com/openpharma/GithubMetrics/actions)
+[![Codecov test
+coverage](https://codecov.io/gh/openpharma/GithubMetrics/branch/master/graph/badge.svg)](https://codecov.io/gh/openpharma/GithubMetrics?branch=master)
 <!-- badges: end -->
 
 The aim of this package is to provide a wrapper on `gh` to quickly get
@@ -57,15 +59,15 @@ repos_raw <- gh_repos_get(
 repos_clean <- gh_repos_clean(repos_raw)
 
 glimpse(repos_clean) 
-#> Rows: 13
+#> Rows: 14
 #> Columns: 7
-#> $ name           <chr> "GithubMetrics", "facetsr", "visR-docs", "sas7bdat", "…
-#> $ full_name      <chr> "openpharma/GithubMetrics", "openpharma/facetsr", "ope…
-#> $ size           <int> 0, 2163, 5435, 87, 939, 1817, 79487, 329, 0, 482, 2863…
-#> $ updated_at     <chr> "2021-01-27T22:25:48Z", "2020-11-30T12:37:13Z", "2020-…
-#> $ default_branch <chr> "master", "master", "master", "master", "master", "mas…
-#> $ language       <chr> "R", "R", "Unsure", "Python", "R", "C", "R", "R", "Uns…
-#> $ MB             <dbl> 0.0, 2.1, 5.3, 0.1, 0.9, 1.8, 77.6, 0.3, 0.0, 0.5, 28.…
+#> $ name           <chr> "BBS-causality-training", "GithubMetrics", "facetsr", …
+#> $ full_name      <chr> "openpharma/BBS-causality-training", "openpharma/Githu…
+#> $ size           <int> 0, 55, 2163, 5435, 87, 939, 1817, 79487, 329, 0, 482, …
+#> $ updated_at     <chr> "2021-01-28T18:44:27Z", "2021-01-28T08:02:24Z", "2020-…
+#> $ default_branch <chr> "main", "master", "master", "master", "master", "maste…
+#> $ language       <chr> "Unsure", "R", "R", "Unsure", "Python", "R", "C", "R",…
+#> $ MB             <dbl> 0.0, 0.1, 2.1, 5.3, 0.1, 0.9, 1.8, 77.6, 0.3, 0.0, 0.5…
 ```
 
 Realistically, research code is likely to be on Github Enterprise, so
@@ -103,13 +105,13 @@ repo_all_commits <- gh_commits_get(
 #> [K
 
 glimpse(repo_all_commits)
-#> Rows: 1,739
+#> Rows: 1,747
 #> Columns: 5
-#> $ full_name      <chr> "openpharma/facetsr", "openpharma/visR-docs", "openpha…
-#> $ author         <chr> "galachad", "Jonnie-Bevan", "actions-user", "actions-u…
-#> $ datetime       <chr> "2020-11-30T11:40:03Z", "2020-09-21T09:45:33Z", "2020-…
-#> $ sha            <chr> "cef40b2227f169d4caa8b8936f0ae25b76f2b53f", "5b35fdbc3…
-#> $ commit_message <chr> "Opensource init relese", "Update README.md", "Publish…
+#> $ full_name      <chr> "openpharma/GithubMetrics", "openpharma/GithubMetrics"…
+#> $ author         <chr> "epijim", "epijim", "epijim", "epijim", "epijim", "epi…
+#> $ datetime       <chr> "2021-01-28T08:02:23Z", "2021-01-28T08:02:09Z", "2021-…
+#> $ sha            <chr> "fc4cc4a9458521c7bdbec7ccf9cad1f0d083f143", "84cb0a8c3…
+#> $ commit_message <chr> "Update README.md", "Update README.md", "try new githu…
 ```
 
 ## Files
@@ -121,11 +123,11 @@ repo_files <- gh_repo_files_get(
   repo_commits = repo_all_commits,
   only_last_commit = TRUE
 )
-#> Pulling files in latest commit from 11 repos
-#>   downloading [====>-------------------------]  18% eta:  2s  downloading [=======>----------------------]  27% eta:  2s  downloading [==========>-------------------]  36% eta:  2s  downloading [=============>----------------]  45% eta:  2s  downloading [===============>--------------]  55% eta:  2s  downloading [==================>-----------]  64% eta:  1s  downloading [=====================>--------]  73% eta:  1s  downloading [========================>-----]  82% eta:  1s  downloading [==========================>---]  91% eta:  0s  downloading [==============================] 100% eta:  0s
+#> Pulling files in latest commit from 12 repos
+#>   downloading [====>-------------------------]  17% eta:  4s  downloading [=======>----------------------]  25% eta:  4s  downloading [=========>--------------------]  33% eta:  3s  downloading [===========>------------------]  42% eta:  3s  downloading [==============>---------------]  50% eta:  3s  downloading [=================>------------]  58% eta:  2s  downloading [===================>----------]  67% eta:  2s  downloading [=====================>--------]  75% eta:  1s  downloading [========================>-----]  83% eta:  1s  downloading [===========================>--]  92% eta:  0s  downloading [==============================] 100% eta:  0s
 
 glimpse(repo_files)
-#> Rows: 1,264
+#> Rows: 1,294
 #> Columns: 6
 #> $ repo       <chr> "openpharma/visR-docs", "openpharma/visR-docs", "openpharm…
 #> $ file       <chr> "readme.md", "docs", "docs/404.html", "docs/code_of_conduc…
@@ -149,6 +151,7 @@ repo_files %>%
 | :------------------------------ | ----: | ------: | -----------: |
 | openpharma/CTP                  |   100 |      30 |            0 |
 | openpharma/facetsr              |    63 |      13 |            0 |
+| openpharma/GithubMetrics        |    30 |      17 |            0 |
 | openpharma/openpharma.github.io |    76 |       1 |            0 |
 | openpharma/pypharma\_nlp        |   131 |       0 |           49 |
 | openpharma/RDO                  |   105 |      11 |            0 |
@@ -174,7 +177,7 @@ glimpse(results)
 #> $ name      <chr> "GithubMetrics", "GithubMetrics", "facetsr", "facetsr", "vi…
 #> $ file_name <chr> "README.md", "README.Rmd", "README.md", "README.Rmd", "READ…
 #> $ path      <chr> "README.md", "README.Rmd", "README.md", "README.Rmd", "READ…
-#> $ url       <chr> "https://github.com/openpharma/GithubMetrics/blob/5ff1d4aaf…
+#> $ url       <chr> "https://github.com/openpharma/GithubMetrics/blob/fc4cc4a94…
 #> $ score     <dbl> 1, 1, 1, 1, 1, 1, 1, 1, 1, 1
 #> $ lang      <chr> "Markdown", "R", "Markdown", "R", "Markdown", "R", "R", "R"…
 ```

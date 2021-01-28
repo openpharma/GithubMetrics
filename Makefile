@@ -7,5 +7,5 @@ PKGVERS = `sed -n "s/Version: *\([^ ]*\)/\1/p" DESCRIPTION`
 
 
 build:
-	Rscript  -e "rmarkdown::render('README.Rmd')"
+	Rscript  -e "rmarkdown::render('README.Rmd', output_format = 'github_document')"
 	Rscript -e "pkgdown::deploy_to_branch()"

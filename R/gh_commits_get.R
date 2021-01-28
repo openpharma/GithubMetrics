@@ -34,7 +34,7 @@ gh_commits_get <- function(
     glue::glue("Pulling commits looking back to {from_date}")
     )
 
-  pb <- progress_estimated(length(full_names))
+  pb <- dplyr::progress_estimated(length(full_names))
   # pb <- progress::progress_bar$new(
   #   format = "  downloading [:bar] :percent eta: :eta",
   #   clear = FALSE, width= 60,
@@ -50,7 +50,7 @@ gh_commits_get <- function(
 
   # IF MISSING - haven't set up email
   commits <- commits %>%
-    mutate(
+    dplyr::mutate(
       author = ifelse(is.na(author),".gitconfig missing email",author)
     )
 

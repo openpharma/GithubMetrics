@@ -4,7 +4,7 @@
 \name{GithubMetrics-package}
 \alias{GithubMetrics}
 \alias{GithubMetrics-package}
-\title{GithubMetrics: Quickly get key metrics on Github repositaries.}
+\title{GithubMetrics: Quickly get key metrics on Github repositaries}
 \description{
 More about what it does (maybe more than one line)
     Use four spaces when indenting paragraphs within the Description.
