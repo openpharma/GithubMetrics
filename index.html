@@ -84,14 +84,20 @@
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">GithubMetrics</span><span class="op">)</span>
 <span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="http://tidyverse.tidyverse.org">tidyverse</a></span><span class="op">)</span>
-<span class="co">#&gt; ── Attaching packages ─────────────────────────────────────────────────────────── tidyverse 1.3.0 ──</span>
+<span class="co">#&gt; ── Attaching packages ──────────────────────────────────────────────────────────────────────────────────────────── tidyverse 1.3.0 ──</span>
 <span class="co">#&gt; ✓ ggplot2 3.3.3     ✓ purrr   0.3.4</span>
-<span class="co">#&gt; ✓ tibble  3.0.5     ✓ dplyr   1.0.3</span>
+<span class="co">#&gt; ✓ tibble  3.0.6     ✓ dplyr   1.0.3</span>
 <span class="co">#&gt; ✓ tidyr   1.1.2     ✓ stringr 1.4.0</span>
 <span class="co">#&gt; ✓ readr   1.4.0     ✓ forcats 0.5.0</span>
-<span class="co">#&gt; ── Conflicts ────────────────────────────────────────────────────────────── tidyverse_conflicts() ──</span>
+<span class="co">#&gt; ── Conflicts ─────────────────────────────────────────────────────────────────────────────────────────────── tidyverse_conflicts() ──</span>
 <span class="co">#&gt; x dplyr::filter() masks stats::filter()</span>
 <span class="co">#&gt; x dplyr::lag()    masks stats::lag()</span>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/tidyverse/glue">glue</a></span><span class="op">)</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; Attaching package: 'glue'</span>
+<span class="co">#&gt; The following object is masked from 'package:dplyr':</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt;     collapse</span>
 
 <span class="va">organisation</span> <span class="op">&lt;-</span> <span class="st">"openpharma"</span></code></pre></div>
 </div>
@@ -111,10 +117,10 @@
 <span class="co">#&gt; Columns: 7</span>
 <span class="co">#&gt; $ name           &lt;chr&gt; "BBS-causality-training", "GithubMetrics", "facetsr", …</span>
 <span class="co">#&gt; $ full_name      &lt;chr&gt; "openpharma/BBS-causality-training", "openpharma/Githu…</span>
-<span class="co">#&gt; $ size           &lt;int&gt; 0, 55, 2163, 5435, 87, 939, 1817, 79487, 329, 0, 482, …</span>
-<span class="co">#&gt; $ updated_at     &lt;chr&gt; "2021-01-28T18:44:27Z", "2021-01-28T20:49:09Z", "2020-…</span>
+<span class="co">#&gt; $ size           &lt;int&gt; 27, 100, 2163, 5435, 87, 939, 1817, 79487, 329, 0, 482…</span>
+<span class="co">#&gt; $ updated_at     &lt;chr&gt; "2021-01-29T18:01:35Z", "2021-01-29T21:43:05Z", "2020-…</span>
 <span class="co">#&gt; $ default_branch &lt;chr&gt; "main", "master", "master", "master", "master", "maste…</span>
-<span class="co">#&gt; $ language       &lt;chr&gt; "Unsure", "R", "R", "Unsure", "Python", "R", "C", "R",…</span>
+<span class="co">#&gt; $ language       &lt;chr&gt; "R", "R", "R", "Unsure", "Python", "R", "C", "R", "R",…</span>
 <span class="co">#&gt; $ MB             &lt;dbl&gt; 0.0, 0.1, 2.1, 5.3, 0.1, 0.9, 1.8, 77.6, 0.3, 0.0, 0.5…</span></code></pre></div>
 <p>Realistically, research code is likely to be on Github Enterprise, so the <code>.api_url</code> and <code>.token</code> parameters can be passed through to <code>gh()</code>. Commented code below shows how you can use an on-premise Github server.</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
@@ -135,27 +141,462 @@
 <span class="op">)</span>
 
 <span class="fu">glimpse</span><span class="op">(</span><span class="va">repo_all_commits</span><span class="op">)</span>
-<span class="co">#&gt; Rows: 1,747</span>
+<span class="co">#&gt; Rows: 1,758</span>
 <span class="co">#&gt; Columns: 5</span>
-<span class="co">#&gt; $ full_name      &lt;chr&gt; "openpharma/GithubMetrics", "openpharma/GithubMetrics"…</span>
-<span class="co">#&gt; $ author         &lt;chr&gt; "epijim", "epijim", "epijim", "epijim", "epijim", "epi…</span>
-<span class="co">#&gt; $ datetime       &lt;chr&gt; "2021-01-28T08:02:23Z", "2021-01-28T08:02:09Z", "2021-…</span>
-<span class="co">#&gt; $ sha            &lt;chr&gt; "fc4cc4a9458521c7bdbec7ccf9cad1f0d083f143", "84cb0a8c3…</span>
-<span class="co">#&gt; $ commit_message &lt;chr&gt; "Update README.md", "Update README.md", "try new githu…</span></code></pre></div>
+<span class="co">#&gt; $ full_name      &lt;chr&gt; "openpharma/BBS-causality-training", "openpharma/BBS-c…</span>
+<span class="co">#&gt; $ author         &lt;chr&gt; "heinzmann537", "heinzmann537", "heinzmann537", "epiji…</span>
+<span class="co">#&gt; $ datetime       &lt;chr&gt; "2021-01-29T18:00:10Z", "2021-01-29T12:55:54Z", "2021-…</span>
+<span class="co">#&gt; $ sha            &lt;chr&gt; "5ac98df2a99db3b50abae114e37c00e433903094", "059569252…</span>
+<span class="co">#&gt; $ commit_message &lt;chr&gt; "Update variable naming ADALM", "Small change", "First…</span></code></pre></div>
+</div>
+<div id="people" class="section level2">
+<h2 class="hasAnchor">
+<a href="#people" class="anchor"></a>People</h2>
+<p>Pull all the people that have committed in <code>r</code>.</p>
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">contributors</span> <span class="op">&lt;-</span> <span class="va">repo_all_commits</span> <span class="op">%&gt;%</span>
+  <span class="fu">group_by</span><span class="op">(</span><span class="va">author</span><span class="op">)</span> <span class="op">%&gt;%</span>
+  <span class="fu">summarise</span><span class="op">(</span>
+    commits <span class="op">=</span> <span class="fu">n</span><span class="op">(</span><span class="op">)</span>
+  <span class="op">)</span> <span class="op">%&gt;%</span>
+  <span class="fu"><a href="https://rdrr.io/r/stats/filter.html">filter</a></span><span class="op">(</span><span class="op">!</span><span class="va">author</span> <span class="op">%in%</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">".gitconfig missing email"</span>,<span class="st">"actions-user"</span><span class="op">)</span><span class="op">)</span>
+  
+<span class="va">contributors</span> <span class="op">&lt;-</span> <span class="va">contributors</span> <span class="op">%&gt;%</span>
+  <span class="fu">left_join</span><span class="op">(</span>
+    <span class="fu"><a href="reference/gh_user_get.html">gh_user_get</a></span><span class="op">(</span><span class="va">contributors</span><span class="op">$</span><span class="va">author</span><span class="op">)</span>,
+    by <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"author"</span><span class="op">=</span><span class="st">"username"</span><span class="op">)</span>
+  <span class="op">)</span>
+
+<span class="va">contributors</span> <span class="op">%&gt;%</span>
+  <span class="fu">arrange</span><span class="op">(</span><span class="op">-</span><span class="va">commits</span><span class="op">)</span> <span class="op">%&gt;%</span>
+  <span class="fu">mutate</span><span class="op">(</span>
+    last_active <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Sys.time.html">Sys.Date</a></span><span class="op">(</span><span class="op">)</span> <span class="op">-</span> <span class="va">last_active</span>,
+    contributor <span class="op">=</span> <span class="fu"><a href="https://glue.tidyverse.org/reference/glue.html">glue</a></span><span class="op">(</span><span class="st">'&lt;img src="{avatar}" alt="" height="30"&gt; {author}'</span><span class="op">)</span>,
+    blog <span class="op">=</span> <span class="fu">case_when</span><span class="op">(</span>
+      <span class="va">blog</span> <span class="op">==</span> <span class="st">""</span> <span class="op">~</span> <span class="st">""</span>,
+      <span class="cn">TRUE</span> <span class="op">~</span> <span class="fu"><a href="https://rdrr.io/r/base/character.html">as.character</a></span><span class="op">(</span><span class="fu"><a href="https://glue.tidyverse.org/reference/glue.html">glue</a></span><span class="op">(</span><span class="st">'&lt;a href="{blog}"&gt;link&lt;/a&gt;'</span><span class="op">)</span><span class="op">)</span>
+      <span class="op">)</span>
+    <span class="op">)</span> <span class="op">%&gt;%</span>
+  <span class="fu">select</span><span class="op">(</span><span class="va">contributor</span>,<span class="va">commits</span>,<span class="va">name</span>,<span class="va">last_active</span>,<span class="va">company</span>,<span class="va">location</span>,<span class="va">blog</span><span class="op">)</span> <span class="op">%&gt;%</span>
+  <span class="fu">knitr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html">kable</a></span><span class="op">(</span>
+    
+  <span class="op">)</span></code></pre></div>
+<table class="table">
+<colgroup>
+<col width="39%">
+<col width="2%">
+<col width="7%">
+<col width="4%">
+<col width="13%">
+<col width="9%">
+<col width="22%">
+</colgroup>
+<thead><tr class="header">
+<th align="left">contributor</th>
+<th align="right">commits</th>
+<th align="left">name</th>
+<th align="left">last_active</th>
+<th align="left">company</th>
+<th align="left">location</th>
+<th align="left">blog</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td align="left">
+<img src="https://avatars.githubusercontent.com/u/134711?v=4" alt="" height="30"> evanmiller</td>
+<td align="right">936</td>
+<td align="left">Evan Miller</td>
+<td align="left">13 days</td>
+<td align="left">NA</td>
+<td align="left">Chicago, IL</td>
+<td align="left"><a href="https://www.evanmiller.org/">link</a></td>
+</tr>
+<tr class="even">
+<td align="left">
+<img src="https://avatars.githubusercontent.com/u/47894155?v=4" alt="" height="30"> SHAESEN2</td>
+<td align="right">127</td>
+<td align="left">Steven Haesendonckx</td>
+<td align="left">16 days</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left"></td>
+</tr>
+<tr class="odd">
+<td align="left">
+<img src="https://avatars.githubusercontent.com/u/4087430?v=4" alt="" height="30"> diego-s</td>
+<td align="right">122</td>
+<td align="left">Diego S</td>
+<td align="left">251 days</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left"></td>
+</tr>
+<tr class="even">
+<td align="left">
+<img src="https://avatars.githubusercontent.com/u/19621679?v=4" alt="" height="30"> bailliem</td>
+<td align="right">109</td>
+<td align="left">Mark Baillie</td>
+<td align="left">0 days</td>
+<td align="left">NA</td>
+<td align="left">Basel, CH</td>
+<td align="left"><a href="https://graphicsprinciples.github.io/">link</a></td>
+</tr>
+<tr class="odd">
+<td align="left">
+<img src="https://avatars.githubusercontent.com/u/2760096?v=4" alt="" height="30"> epijim</td>
+<td align="right">85</td>
+<td align="left">James Black</td>
+<td align="left">1 days</td>
+<td align="left">Roche</td>
+<td align="left">Basel, Switzerland</td>
+<td align="left"><a href="www.epijim.uk">link</a></td>
+</tr>
+<tr class="even">
+<td align="left">
+<img src="https://avatars.githubusercontent.com/u/630869?v=4" alt="" height="30"> jaredhobbs</td>
+<td align="right">70</td>
+<td align="left">Jared Hobbs</td>
+<td align="left">85 days</td>
+<td align="left">YearEnd, Inc.</td>
+<td align="left">Salt Lake City, UT</td>
+<td align="left"><a href="pyhacker.com">link</a></td>
+</tr>
+<tr class="odd">
+<td align="left">
+<img src="https://avatars.githubusercontent.com/u/2522236?v=4" alt="" height="30"> kalimu</td>
+<td align="right">42</td>
+<td align="left">Kamil Wais</td>
+<td align="left">5 days</td>
+<td align="left">7N / Roche</td>
+<td align="left">Rzeszów</td>
+<td align="left"><a href="kalimu.github.io">link</a></td>
+</tr>
+<tr class="even">
+<td align="left">
+<img src="https://avatars.githubusercontent.com/u/42960410?v=4" alt="" height="30"> Jonnie-Bevan</td>
+<td align="right">28</td>
+<td align="left">NA</td>
+<td align="left">59 days</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left"></td>
+</tr>
+<tr class="odd">
+<td align="left">
+<img src="https://avatars.githubusercontent.com/u/3072980?v=4" alt="" height="30"> cschaerfe</td>
+<td align="right">21</td>
+<td align="left">Charlotta</td>
+<td align="left">114 days</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left"></td>
+</tr>
+<tr class="even">
+<td align="left">
+<img src="https://avatars.githubusercontent.com/u/1036561?v=4" alt="" height="30"> davidanthoff</td>
+<td align="right">12</td>
+<td align="left">David Anthoff</td>
+<td align="left">10 days</td>
+<td align="left">University of California, Berkeley</td>
+<td align="left">Berkeley, CA</td>
+<td align="left"><a href="www.david-anthoff.com">link</a></td>
+</tr>
+<tr class="odd">
+<td align="left">
+<img src="https://avatars.githubusercontent.com/u/1190392?v=4" alt="" height="30"> jar1karp</td>
+<td align="right">12</td>
+<td align="left">Jari Karppinen</td>
+<td align="left">150 days</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left"><a href="https://finecon.tech">link</a></td>
+</tr>
+<tr class="even">
+<td align="left">
+<img src="https://avatars.githubusercontent.com/u/13412395?v=4" alt="" height="30"> mikmart</td>
+<td align="right">12</td>
+<td align="left">Mikko Marttila</td>
+<td align="left">13 days</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left"><a href="https://mikmart.rbind.io">link</a></td>
+</tr>
+<tr class="odd">
+<td align="left">
+<img src="https://avatars.githubusercontent.com/u/8436725?v=4" alt="" height="30"> reikoch</td>
+<td align="right">8</td>
+<td align="left">NA</td>
+<td align="left">2 days</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left"></td>
+</tr>
+<tr class="even">
+<td align="left">
+<img src="https://avatars.githubusercontent.com/u/86842?v=4" alt="" height="30"> afeld</td>
+<td align="right">6</td>
+<td align="left">Aidan Feldman</td>
+<td align="left">2 days</td>
+<td align="left">@GSA and personal projects</td>
+<td align="left">Brooklyn, NY</td>
+<td align="left"><a href="https://api.afeld.me">link</a></td>
+</tr>
+<tr class="odd">
+<td align="left">
+<img src="https://avatars.githubusercontent.com/u/14346503?v=4" alt="" height="30"> erblast</td>
+<td align="right">6</td>
+<td align="left">Björn Oettinghaus</td>
+<td align="left">18 days</td>
+<td align="left">NA</td>
+<td align="left">Switzerland</td>
+<td align="left"><a href="www.datisticsblog.com">link</a></td>
+</tr>
+<tr class="even">
+<td align="left">
+<img src="https://avatars.githubusercontent.com/u/4465050?v=4" alt="" height="30"> lionel-</td>
+<td align="right">6</td>
+<td align="left">Lionel Henry</td>
+<td align="left">66 days</td>
+<td align="left">@rstudio</td>
+<td align="left">NA</td>
+<td align="left"></td>
+</tr>
+<tr class="odd">
+<td align="left">
+<img src="https://avatars.githubusercontent.com/u/3423010?v=4" alt="" height="30"> bpfoley</td>
+<td align="right">5</td>
+<td align="left">Brian Foley</td>
+<td align="left">90 days</td>
+<td align="left">NA</td>
+<td align="left">Seattle, Washington</td>
+<td align="left"></td>
+</tr>
+<tr class="even">
+<td align="left">
+<img src="https://avatars.githubusercontent.com/u/64608407?v=4" alt="" height="30"> rebecca-albrecht</td>
+<td align="right">4</td>
+<td align="left">NA</td>
+<td align="left">1 days</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left"></td>
+</tr>
+<tr class="odd">
+<td align="left">
+<img src="https://avatars.githubusercontent.com/u/12818242?v=4" alt="" height="30"> dazim</td>
+<td align="right">3</td>
+<td align="left">Tim Treis</td>
+<td align="left">19 days</td>
+<td align="left">NA</td>
+<td align="left">Heidelberg, Germany</td>
+<td align="left"></td>
+</tr>
+<tr class="even">
+<td align="left">
+<img src="https://avatars.githubusercontent.com/u/78169972?v=4" alt="" height="30"> heinzmann537</td>
+<td align="right">3</td>
+<td align="left">NA</td>
+<td align="left">1 days</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left"></td>
+</tr>
+<tr class="odd">
+<td align="left">
+<img src="https://avatars.githubusercontent.com/u/63361362?v=4" alt="" height="30"> kentm4</td>
+<td align="right">3</td>
+<td align="left">Matt Kent</td>
+<td align="left">4 days</td>
+<td align="left">Genesis Research</td>
+<td align="left">NA</td>
+<td align="left"></td>
+</tr>
+<tr class="even">
+<td align="left">
+<img src="https://avatars.githubusercontent.com/u/70370146?v=4" alt="" height="30"> PaulJordan57</td>
+<td align="right">3</td>
+<td align="left">NA</td>
+<td align="left">15 days</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left"></td>
+</tr>
+<tr class="odd">
+<td align="left">
+<img src="https://avatars.githubusercontent.com/u/4296390?v=4" alt="" height="30"> galachad</td>
+<td align="right">2</td>
+<td align="left">Adam Foryś</td>
+<td align="left">16 days</td>
+<td align="left">@Roche</td>
+<td align="left">Warsaw, Poland</td>
+<td align="left"><a href="http://temote.pl">link</a></td>
+</tr>
+<tr class="even">
+<td align="left">
+<img src="https://avatars.githubusercontent.com/u/13813876?v=4" alt="" height="30"> gerph</td>
+<td align="right">2</td>
+<td align="left">Charles Ferguson</td>
+<td align="left">4 days</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left"></td>
+</tr>
+<tr class="odd">
+<td align="left">
+<img src="https://avatars.githubusercontent.com/u/4196?v=4" alt="" height="30"> hadley</td>
+<td align="right">2</td>
+<td align="left">Hadley Wickham</td>
+<td align="left">3 days</td>
+<td align="left">@rstudio</td>
+<td align="left">Houston, TX</td>
+<td align="left"><a href="http://hadley.nz">link</a></td>
+</tr>
+<tr class="even">
+<td align="left">
+<img src="https://avatars.githubusercontent.com/u/12675476?v=4" alt="" height="30"> kawap</td>
+<td align="right">2</td>
+<td align="left">NA</td>
+<td align="left">285 days</td>
+<td align="left">Roche / 7N</td>
+<td align="left">NA</td>
+<td align="left"></td>
+</tr>
+<tr class="odd">
+<td align="left">
+<img src="https://avatars.githubusercontent.com/u/413418?v=4" alt="" height="30"> kleschenko</td>
+<td align="right">2</td>
+<td align="left">Kostya Leschenko</td>
+<td align="left">1 days</td>
+<td align="left">@datarobot</td>
+<td align="left">Lviv, Ukraine</td>
+<td align="left"></td>
+</tr>
+<tr class="even">
+<td align="left">
+<img src="https://avatars.githubusercontent.com/u/2666691?v=4" alt="" height="30"> kshedden</td>
+<td align="right">2</td>
+<td align="left">Kerby Shedden</td>
+<td align="left">4 days</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left"></td>
+</tr>
+<tr class="odd">
+<td align="left">
+<img src="https://avatars.githubusercontent.com/u/1206052?v=4" alt="" height="30"> kurt-vd</td>
+<td align="right">2</td>
+<td align="left">Kurt Van Dijck</td>
+<td align="left">59 days</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left"></td>
+</tr>
+<tr class="even">
+<td align="left">
+<img src="https://avatars.githubusercontent.com/u/306380?v=4" alt="" height="30"> mrocklin</td>
+<td align="right">2</td>
+<td align="left">Matthew Rocklin</td>
+<td align="left">1 days</td>
+<td align="left">@coiled</td>
+<td align="left">San Juan Capistrano, CA</td>
+<td align="left"><a href="https://coiled.io">link</a></td>
+</tr>
+<tr class="odd">
+<td align="left">
+<img src="https://avatars.githubusercontent.com/u/11788080?v=4" alt="" height="30"> thomas-neitmann</td>
+<td align="right">2</td>
+<td align="left">Thomas Neitmann</td>
+<td align="left">14 days</td>
+<td align="left">Roche</td>
+<td align="left">Basel, Switzerland</td>
+<td align="left"><a href="https://thomasadventure.blog/">link</a></td>
+</tr>
+<tr class="even">
+<td align="left">
+<img src="https://avatars.githubusercontent.com/u/7786462?v=4" alt="" height="30"> waddella</td>
+<td align="right">2</td>
+<td align="left">Adrian Waddell</td>
+<td align="left">23 days</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left"><a href="http://adrian.waddell.ch">link</a></td>
+</tr>
+<tr class="odd">
+<td align="left">
+<img src="https://avatars.githubusercontent.com/u/6396159?v=4" alt="" height="30"> ararslan</td>
+<td align="right">1</td>
+<td align="left">Alex Arslan</td>
+<td align="left">1 days</td>
+<td align="left">Beacon Biosignals</td>
+<td align="left">Seattle, WA</td>
+<td align="left"></td>
+</tr>
+<tr class="even">
+<td align="left">
+<img src="https://avatars.githubusercontent.com/u/7089667?v=4" alt="" height="30"> ginberg</td>
+<td align="right">1</td>
+<td align="left">NA</td>
+<td align="left">10 days</td>
+<td align="left">NA</td>
+<td align="left">Remote</td>
+<td align="left"><a href="gerinberg.com">link</a></td>
+</tr>
+<tr class="odd">
+<td align="left">
+<img src="https://avatars.githubusercontent.com/u/74075?v=4" alt="" height="30"> ivarref</td>
+<td align="right">1</td>
+<td align="left">Ivar Refsdal</td>
+<td align="left">9 days</td>
+<td align="left">NA</td>
+<td align="left">Bergen, Norway</td>
+<td align="left"></td>
+</tr>
+<tr class="even">
+<td align="left">
+<img src="https://avatars.githubusercontent.com/u/3240247?v=4" alt="" height="30"> jonathon-love</td>
+<td align="right">1</td>
+<td align="left">Jonathon Love</td>
+<td align="left">1 days</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left"><a href="http://jona.thon.love">link</a></td>
+</tr>
+<tr class="odd">
+<td align="left">
+<img src="https://avatars.githubusercontent.com/u/60743662?v=4" alt="" height="30"> Karissa</td>
+<td align="right">1</td>
+<td align="left">NA</td>
+<td align="left">359 days</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left"></td>
+</tr>
+<tr class="even">
+<td align="left">
+<img src="https://avatars.githubusercontent.com/u/61869726?v=4" alt="" height="30"> thanos-siadimas</td>
+<td align="right">1</td>
+<td align="left">NA</td>
+<td align="left">68 days</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left"></td>
+</tr>
+</tbody>
+</table>
 </div>
 <div id="files" class="section level2">
 <h2 class="hasAnchor">
 <a href="#files" class="anchor"></a>Files</h2>
 <p>Get all of the files present in the last commit of all the repos.</p>
-<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">repo_files</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/gh_repo_files_get.html">gh_repo_files_get</a></span><span class="op">(</span>
   repo_commits <span class="op">=</span> <span class="va">repo_all_commits</span>,
   only_last_commit <span class="op">=</span> <span class="cn">TRUE</span>
 <span class="op">)</span>
-<span class="co">#&gt; Pulling files in latest commit from 12 repos</span>
+<span class="co">#&gt; Pulling files in latest commit from 13 repos</span>
 
 <span class="fu">glimpse</span><span class="op">(</span><span class="va">repo_files</span><span class="op">)</span>
-<span class="co">#&gt; Rows: 1,294</span>
+<span class="co">#&gt; Rows: 1,310</span>
 <span class="co">#&gt; Columns: 6</span>
 <span class="co">#&gt; $ repo       &lt;chr&gt; "openpharma/visR-docs", "openpharma/visR-docs", "openpharm…</span>
 <span class="co">#&gt; $ file       &lt;chr&gt; "readme.md", "docs", "docs/404.html", "docs/code_of_conduc…</span>
@@ -182,72 +623,78 @@
 </tr></thead>
 <tbody>
 <tr class="odd">
+<td align="left">openpharma/BBS-causality-training</td>
+<td align="right">4</td>
+<td align="right">2</td>
+<td align="right">0</td>
+</tr>
+<tr class="even">
 <td align="left">openpharma/CTP</td>
 <td align="right">100</td>
 <td align="right">30</td>
 <td align="right">0</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td align="left">openpharma/facetsr</td>
 <td align="right">63</td>
 <td align="right">13</td>
 <td align="right">0</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td align="left">openpharma/GithubMetrics</td>
-<td align="right">30</td>
-<td align="right">17</td>
+<td align="right">42</td>
+<td align="right">20</td>
 <td align="right">0</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td align="left">openpharma/openpharma.github.io</td>
 <td align="right">76</td>
 <td align="right">1</td>
 <td align="right">0</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td align="left">openpharma/pypharma_nlp</td>
 <td align="right">131</td>
 <td align="right">0</td>
 <td align="right">49</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td align="left">openpharma/RDO</td>
 <td align="right">105</td>
 <td align="right">11</td>
 <td align="right">0</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td align="left">openpharma/ReadStat</td>
 <td align="right">207</td>
 <td align="right">0</td>
 <td align="right">0</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td align="left">openpharma/sas7bdat</td>
 <td align="right">8</td>
 <td align="right">0</td>
 <td align="right">2</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td align="left">openpharma/simaerep</td>
 <td align="right">145</td>
 <td align="right">32</td>
 <td align="right">0</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td align="left">openpharma/syntrial</td>
 <td align="right">67</td>
 <td align="right">24</td>
 <td align="right">0</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td align="left">openpharma/visR</td>
 <td align="right">177</td>
 <td align="right">81</td>
 <td align="right">0</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td align="left">openpharma/visR-docs</td>
 <td align="right">185</td>
 <td align="right">0</td>
@@ -256,23 +703,23 @@
 </tbody>
 </table>
 <p>Types of files in the organisation</p>
-<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">results</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/gh_repo_search.html">gh_repo_search</a></span><span class="op">(</span>
   code <span class="op">=</span> <span class="st">"tidyverse"</span>,
   organisation <span class="op">=</span> <span class="va">organisation</span>
 <span class="op">)</span>
 
 <span class="fu">glimpse</span><span class="op">(</span><span class="va">results</span><span class="op">)</span>
-<span class="co">#&gt; Rows: 10</span>
+<span class="co">#&gt; Rows: 12</span>
 <span class="co">#&gt; Columns: 7</span>
 <span class="co">#&gt; $ full_name &lt;chr&gt; "openpharma/GithubMetrics", "openpharma/GithubMetrics", "op…</span>
-<span class="co">#&gt; $ name      &lt;chr&gt; "GithubMetrics", "GithubMetrics", "facetsr", "facetsr", "vi…</span>
-<span class="co">#&gt; $ file_name &lt;chr&gt; "README.md", "README.Rmd", "README.md", "README.Rmd", "READ…</span>
-<span class="co">#&gt; $ path      &lt;chr&gt; "README.md", "README.Rmd", "README.md", "README.Rmd", "READ…</span>
-<span class="co">#&gt; $ url       &lt;chr&gt; "https://github.com/openpharma/GithubMetrics/blob/fc4cc4a94…</span>
-<span class="co">#&gt; $ score     &lt;dbl&gt; 1, 1, 1, 1, 1, 1, 1, 1, 1, 1</span>
-<span class="co">#&gt; $ lang      &lt;chr&gt; "Markdown", "R", "Markdown", "R", "Markdown", "R", "R", "R"…</span></code></pre></div>
-<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+<span class="co">#&gt; $ name      &lt;chr&gt; "GithubMetrics", "GithubMetrics", "GithubMetrics", "GithubM…</span>
+<span class="co">#&gt; $ file_name &lt;chr&gt; "README.md", "README.Rmd", "DESCRIPTION", "test-gh_repos_XX…</span>
+<span class="co">#&gt; $ path      &lt;chr&gt; "README.md", "README.Rmd", "DESCRIPTION", "tests/testthat/t…</span>
+<span class="co">#&gt; $ url       &lt;chr&gt; "https://github.com/openpharma/GithubMetrics/blob/5660c9174…</span>
+<span class="co">#&gt; $ score     &lt;dbl&gt; 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1</span>
+<span class="co">#&gt; $ lang      &lt;chr&gt; "Markdown", "R", NA, "R", "Markdown", "R", "Markdown", "R",…</span></code></pre></div>
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">helper_gh_repo_search</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">x</span>, <span class="va">org</span> <span class="op">=</span> <span class="st">"openpharma"</span><span class="op">)</span><span class="op">{</span>
   
   <span class="co">## Slow it down! as search has 30 calls a minute rate limit.</span>
@@ -352,18 +799,18 @@
 <tr class="odd">
 <td align="left">Novartis</td>
 <td align="right">4</td>
-<td align="right">5</td>
+<td align="right">6</td>
 <td align="right">10</td>
 <td align="right">12</td>
-<td align="right">31</td>
+<td align="right">32</td>
 </tr>
 <tr class="even">
 <td align="left">openpharma</td>
 <td align="right">4</td>
 <td align="right">6</td>
-<td align="right">5</td>
+<td align="right">6</td>
 <td align="right">2</td>
-<td align="right">17</td>
+<td align="right">18</td>
 </tr>
 <tr class="odd">
 <td align="left">Roche</td>
