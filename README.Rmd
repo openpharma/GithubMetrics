@@ -9,7 +9,8 @@ knitr::opts_chunk$set(
   collapse = TRUE,
   comment = "#>",
   fig.path = "man/figures/README-",
-  out.width = "100%"
+  out.width = "100%",
+  knitr.kable.NA = ''
 )
 ```
 
@@ -42,6 +43,7 @@ install.packages("GithubMetrics")
 ```{r setup, warning=FALSE}
 library(GithubMetrics)
 library(tidyverse)
+library(glue)
 
 organisation <- "openpharma"
 ```
@@ -83,6 +85,40 @@ repo_all_commits <- gh_commits_get(
 )
 
 glimpse(repo_all_commits)
+```
+
+## People
+
+Pull all the people that have committed in `r `.
+
+```{r}
+contributors <- repo_all_commits %>%
+  group_by(author) %>%
+  summarise(
+    commits = n()
+  ) %>%
+  filter(!author %in% c(".gitconfig missing email","actions-user"))
+  
+contributors <- contributors %>%
+  left_join(
+    gh_user_get(contributors$author),
+    by = c("author"="username")
+  )
+
+contributors %>%
+  arrange(-commits) %>%
+  mutate(
+    last_active = Sys.Date() - last_active,
+    contributor = glue('<img src="{avatar}" alt="" height="30"> {author}'),
+    blog = case_when(
+      blog == "" ~ "",
+      TRUE ~ as.character(glue('<a href="{blog}">link</a>'))
+      )
+    ) %>%
+  select(contributor,commits,name,last_active,company,location,blog) %>%
+  knitr::kable(
+    
+  )
 ```
 
 ## Files
