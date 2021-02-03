@@ -10,8 +10,8 @@ PKGVERS = `sed -n "s/Version: *\([^ ]*\)/\1/p" DESCRIPTION`
 all: build deploy
 
 build:
-	R CMD INSTALL --no-multiarch --with-keep.source ../GithubMetrics
 	Rscript  -e "devtools::document()"
+	R CMD INSTALL --no-multiarch --with-keep.source ../GithubMetrics
 	Rscript  -e "rmarkdown::render('README.Rmd', output_format = 'github_document')"
 
 deploy:
