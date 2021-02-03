@@ -11,3 +11,5 @@ README.md
 ^pkgdown$
 ^codecov\.yml$
 ^\.github$
+^README\.html$
+^CRAN-RELEASE$
