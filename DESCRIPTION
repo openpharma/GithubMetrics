@@ -1,11 +1,10 @@
 Package: GithubMetrics
 Type: Package
 Title: Quickly get key metrics on Github repositaries
-Version: 0.1.0
+Version: 0.2.0
 Authors@R: c(person("James", "Black", role = c("aut", "cre"),
-                     email = "james.black.jb2@roche.com"))
-Description: More about what it does (maybe more than one line)
-    Use four spaces when indenting paragraphs within the Description.
+                     email = "james@epijim.uk"))
+Description: The aim of this package is to provide a wrapper on gh to quickly get you key Github repo metadata you need.
 License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
@@ -17,7 +16,8 @@ Imports:
     purrr,
     dplyr,
     glue,
-    tibble
+    tibble,
+    base64enc
 RoxygenNote: 7.1.1
 Suggests: 
     covr,

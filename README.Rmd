@@ -40,7 +40,7 @@ install.packages("GithubMetrics")
 
 ## Setup
 
-```{r setup, warning=FALSE}
+```{r setup, warning=FALSE, message=FALSE}
 library(GithubMetrics)
 library(tidyverse)
 library(glue)
@@ -123,7 +123,25 @@ contributors %>%
 
 ## Files
 
-Get all of the files present in the last commit of all the repos.
+Pull a specific file using `gh_file_get()`.
+
+```{r}
+desc_formatted <- gh_file_get(
+  repo = "GithubMetrics",
+  org = "OpenPharma",
+  file = "DESCRIPTION"
+) %>%
+  # format the description
+  desc::desc(text = .)
+
+# Print it
+desc_formatted$get(c("Package","Title","Version")) %>%
+  tibble::enframe() %>%
+  knitr::kable()
+```
+
+Get all of the files present in the last commit of all the repos using 
+`gh_repo_files_get()`.
 
 ```{r}
 repo_files <- gh_repo_files_get(
@@ -184,6 +202,10 @@ packages <- c(
   )
 
 package_use <- bind_rows(
+  packages %>%
+    map_df(
+      helper_gh_repo_search, org = "PHCAnalytics"
+    ),
   packages %>%
     map_df(
       helper_gh_repo_search, org = "openpharma"

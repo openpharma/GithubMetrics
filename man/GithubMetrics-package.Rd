@@ -6,11 +6,10 @@
 \alias{GithubMetrics-package}
 \title{GithubMetrics: Quickly get key metrics on Github repositaries}
 \description{
-More about what it does (maybe more than one line)
-    Use four spaces when indenting paragraphs within the Description.
+The aim of this package is to provide a wrapper on gh to quickly get you key Github repo metadata you need.
 }
 \author{
-\strong{Maintainer}: James Black \email{james.black.jb2@roche.com}
+\strong{Maintainer}: James Black \email{james@epijim.uk}
 
 }
 \keyword{internal}
