@@ -5,7 +5,9 @@ invisible(vcr::vcr_configure(
 ))
 
 if (!nzchar(Sys.getenv("GITHUB_PAT"))) {
-  Sys.setenv("GITHUB_PAT" = "foobar")
+  # BELOW IS NOT A REAL TOKEN
+  # It required one of the right length - so took an old canceled one.
+  Sys.setenv("GITHUB_PAT" = "c55635697d6f3a4b3adccaf2ef1a0918e3f14adf")
 }
 
 vcr::check_cassette_names()

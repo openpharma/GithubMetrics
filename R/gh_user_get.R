@@ -63,7 +63,7 @@ gh_user_get <- function(
 
 
   output %>%
-    mutate(
+    dplyr::mutate(
       joined = as.Date(joined),
       last_active = as.Date(last_active)
     )

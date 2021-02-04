@@ -1,6 +1,6 @@
 Package: GithubMetrics
 Type: Package
-Title: Quickly get key metrics on Github repositaries
+Title: Quickly Get Key Metrics on Github repositories
 Version: 0.2.0
 Authors@R: c(person("James", "Black", role = c("aut", "cre"),
                      email = "james@epijim.uk"))
