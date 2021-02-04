@@ -4,9 +4,9 @@
 \name{GithubMetrics-package}
 \alias{GithubMetrics}
 \alias{GithubMetrics-package}
-\title{GithubMetrics: Quickly get key metrics on Github repositaries}
+\title{GithubMetrics: Quickly Get Key Metrics on Github Repositories}
 \description{
-The aim of this package is to provide a wrapper on gh to quickly get you key Github repo metadata you need.
+The aim of this package is to provide a wrapper on 'gh' to quickly get you key 'Github' metadata you need.
 }
 \author{
 \strong{Maintainer}: James Black \email{james@epijim.uk}
