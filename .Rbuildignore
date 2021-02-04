@@ -13,3 +13,4 @@ README.md
 ^\.github$
 ^README\.html$
 ^CRAN-RELEASE$
+^cran-comments\.md$

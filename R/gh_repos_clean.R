@@ -62,7 +62,7 @@ gh_repos_clean <- function(
   }
   # switch to MB for size
   d_orgs <- d_orgs %>%
-    mutate(
+    dplyr::mutate(
       MB = round(size/1024,1)
     )
 
