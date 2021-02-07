@@ -22,8 +22,8 @@ gh_user_event_get <- function(
 
   tibble::tibble(
     type = events %>% purrr::map_chr("type"),
-    date = events %>% purrr::map_chr("created_at") %>% as.Date(),
-    date_time = events %>% purrr::map_chr("created_at"),
+    date = events %>% purrr::map_chr("created_at") %>% lubridate::as_date(),
+    date_time = events %>% purrr::map_chr("created_at") %>% lubridate::as_datetime(),
     repo = events %>% purrr::map("repo") %>% purrr::map_chr("name")
   )
 
