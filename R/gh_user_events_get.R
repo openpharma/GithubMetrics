@@ -1,6 +1,9 @@
-#' Get a users activity in last 90 days (if authenticated also get private for yourself)
+#' Get a users activity in last 90 days
 #'
-#' @param user The github username (if authenticated will see private as well).
+#' If Authenticated, and you ask for yourself (the authenticated user) you will
+#' also get private activity. Otherwise it's just public.
+#'
+#' @param user The github username
 #' @param ... Pass down to \code{gh}
 #'
 #' @importFrom magrittr "%>%"
