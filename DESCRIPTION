@@ -25,3 +25,5 @@ Suggests:
     vcr,
     tidyverse
 Config/testthat/edition: 3
+emotes:  
+    hadley/emo
