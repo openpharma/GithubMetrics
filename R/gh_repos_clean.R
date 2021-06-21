@@ -23,12 +23,15 @@
 gh_repos_clean <- function(
   orgs
 ) {
+  # If null, NA
+  helper_null2na <- function(x){
+    ifelse(is.null(x),NA,x)
+  }
 
   # Loop through getting repo info from returned object
   d_orgs <- NULL
   for (i in 1:length(orgs)) {
     last_push <- orgs[[i]]$pushed_at
-
     # if never commited
     if (is.null(last_push)) {
       i_org <- tibble::tibble(
@@ -45,7 +48,7 @@ gh_repos_clean <- function(
       i_org <- tibble::tibble(
         name = orgs[[i]]$name
         ,full_name = orgs[[i]]$full_name
-        #,description = orgs[[i]]$description
+        ,description = helper_null2na(orgs[[i]]$description)
         ,size = orgs[[i]]$size
         ,updated_at = orgs[[i]]$pushed_at
         ,default_branch = orgs[[i]]$default_branch
