@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Get files in a repo — gh_user_get • GithubMetrics</title>
+<title>Get issues for a repo — gh_issues_get • GithubMetrics</title>
 
 
 <!-- jquery -->
@@ -39,8 +39,8 @@
 
 
 
-<meta property="og:title" content="Get files in a repo — gh_user_get" />
-<meta property="og:description" content="Get files in a repo" />
+<meta property="og:title" content="Get issues for a repo — gh_issues_get" />
+<meta property="og:description" content="Get issues for a repo" />
 
 
 
@@ -106,29 +106,48 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Get files in a repo</h1>
+    <h1>Get issues for a repo</h1>
     
-    <div class="hidden name"><code>gh_user_get.Rd</code></div>
+    <div class="hidden name"><code>gh_issues_get.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Get files in a repo</p>
+    <p>Get issues for a repo</p>
     </div>
 
-    <pre class="usage"><span class='fu'>gh_user_get</span><span class='op'>(</span><span class='va'>user</span>, <span class='va'>...</span><span class='op'>)</span></pre>
+    <pre class="usage"><span class='fu'>gh_issues_get</span><span class='op'>(</span><span class='va'>full_names</span>, <span class='va'>days_back</span>, <span class='va'>...</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>user</th>
-      <td><p>Character vector with Github username (called author in their objs)</p></td>
+      <th>full_names</th>
+      <td><p>Vector of repo names (format 'org/repo')</p></td>
+    </tr>
+    <tr>
+      <th>days_back</th>
+      <td><p>How many days back to look for commits.</p></td>
     </tr>
     <tr>
       <th>...</th>
       <td><p>Pass down options to <code><a href='https://gh.r-lib.org/reference/gh.html'>gh::gh()</a></code></p></td>
     </tr>
     </table>
+
+    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
+
+    <p><strong>New Columns</strong></p>
+<dl>
+
+ <dt>title</dt><dd><p>Issue title</p></dd>
+ <dt>url</dt><dd><p>Link to issue</p></dd>
+ <dt>state</dt><dd><p>State of the issue (e.g. open or closed)</p></dd>
+ <dt>created, updated, closed</dt><dd><p>Unique hash - can be joined on repo_sha from <code><a href='gh_repo_files_get.html'>gh_repo_files_get()</a></code></p></dd>
+ <dt>comments</dt><dd><p>The commit message</p></dd>
+ <dt>body</dt><dd><p>The commit message</p></dd>
+ <dt>author</dt><dd><p>The commit message</p></dd>
+
+</dl>
 
 
   </div>
