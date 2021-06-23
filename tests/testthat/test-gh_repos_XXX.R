@@ -22,7 +22,7 @@ test_that("Clean the repos has write vars", {
 
   expect_equal(
     names(x),
-    c("name","full_name","size","updated_at","default_branch","language","MB")
+    c("name","full_name","description","size","updated_at","default_branch","language","MB")
   )
 
 })
