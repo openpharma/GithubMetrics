@@ -31,7 +31,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="index.html">GithubMetrics</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.2.3</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.0</span>
       </span>
     </div>
 
@@ -101,7 +101,7 @@
 
 <span class="va">repos_clean</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/gh_repos_clean.html">gh_repos_clean</a></span><span class="op">(</span><span class="va">repos_raw</span><span class="op">)</span>
 
-<span class="fu">glimpse</span><span class="op">(</span><span class="va">repos_clean</span><span class="op">)</span> 
+<span class="fu"><a href="https://pillar.r-lib.org/reference/glimpse.html">glimpse</a></span><span class="op">(</span><span class="va">repos_clean</span><span class="op">)</span> 
 <span class="co">#&gt; Rows: 14</span>
 <span class="co">#&gt; Columns: 7</span>
 <span class="co">#&gt; $ name           &lt;chr&gt; "BBS-causality-training", "GithubMetrics", "facetsr", …</span>
@@ -125,11 +125,11 @@
 <p>Get every commit for all the repos in this organisation.</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">repo_all_commits</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/gh_commits_get.html">gh_commits_get</a></span><span class="op">(</span>
-  <span class="va">repos_clean</span> <span class="op">%&gt;%</span> <span class="fu"><a href="https://rdrr.io/r/stats/filter.html">filter</a></span><span class="op">(</span><span class="va">size</span> <span class="op">&gt;</span> <span class="fl">0</span><span class="op">)</span> <span class="op">%&gt;%</span> <span class="fu">pull</span><span class="op">(</span><span class="va">full_name</span><span class="op">)</span>, 
+  <span class="va">repos_clean</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">size</span> <span class="op">&gt;</span> <span class="fl">0</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/pull.html">pull</a></span><span class="op">(</span><span class="va">full_name</span><span class="op">)</span>, 
   days_back <span class="op">=</span> <span class="fl">365</span><span class="op">*</span><span class="fl">10</span>
 <span class="op">)</span>
 
-<span class="fu">glimpse</span><span class="op">(</span><span class="va">repo_all_commits</span><span class="op">)</span>
+<span class="fu"><a href="https://pillar.r-lib.org/reference/glimpse.html">glimpse</a></span><span class="op">(</span><span class="va">repo_all_commits</span><span class="op">)</span>
 <span class="co">#&gt; Rows: 1,762</span>
 <span class="co">#&gt; Columns: 5</span>
 <span class="co">#&gt; $ full_name      &lt;chr&gt; "openpharma/BBS-causality-training", "openpharma/BBS-c…</span>
@@ -143,30 +143,30 @@
 <a href="#people" class="anchor"></a>People</h2>
 <p>Pull all the people that have committed in <code>r</code>.</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">contributors</span> <span class="op">&lt;-</span> <span class="va">repo_all_commits</span> <span class="op">%&gt;%</span>
-  <span class="fu">group_by</span><span class="op">(</span><span class="va">author</span><span class="op">)</span> <span class="op">%&gt;%</span>
-  <span class="fu">summarise</span><span class="op">(</span>
-    commits <span class="op">=</span> <span class="fu">n</span><span class="op">(</span><span class="op">)</span>
-  <span class="op">)</span> <span class="op">%&gt;%</span>
-  <span class="fu"><a href="https://rdrr.io/r/stats/filter.html">filter</a></span><span class="op">(</span><span class="op">!</span><span class="va">author</span> <span class="op">%in%</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">".gitconfig missing email"</span>,<span class="st">"actions-user"</span><span class="op">)</span><span class="op">)</span>
+<code class="sourceCode R"><span class="va">contributors</span> <span class="op">&lt;-</span> <span class="va">repo_all_commits</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span>
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span><span class="op">(</span><span class="va">author</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span>
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarise</a></span><span class="op">(</span>
+    commits <span class="op">=</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/context.html">n</a></span><span class="op">(</span><span class="op">)</span>
+  <span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span>
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="op">!</span><span class="va">author</span> <span class="op"><a href="https://rdrr.io/r/base/match.html">%in%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">".gitconfig missing email"</span>,<span class="st">"actions-user"</span><span class="op">)</span><span class="op">)</span>
   
-<span class="va">contributors</span> <span class="op">&lt;-</span> <span class="va">contributors</span> <span class="op">%&gt;%</span>
-  <span class="fu">left_join</span><span class="op">(</span>
+<span class="va">contributors</span> <span class="op">&lt;-</span> <span class="va">contributors</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span>
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate-joins.html">left_join</a></span><span class="op">(</span>
     <span class="fu"><a href="reference/gh_user_get.html">gh_user_get</a></span><span class="op">(</span><span class="va">contributors</span><span class="op">$</span><span class="va">author</span><span class="op">)</span>,
     by <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"author"</span><span class="op">=</span><span class="st">"username"</span><span class="op">)</span>
   <span class="op">)</span>
 
-<span class="va">contributors</span> <span class="op">%&gt;%</span>
-  <span class="fu">arrange</span><span class="op">(</span><span class="op">-</span><span class="va">commits</span><span class="op">)</span> <span class="op">%&gt;%</span>
-  <span class="fu">mutate</span><span class="op">(</span>
+<span class="va">contributors</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span>
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/arrange.html">arrange</a></span><span class="op">(</span><span class="op">-</span><span class="va">commits</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span>
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>
     last_active <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Sys.time.html">Sys.Date</a></span><span class="op">(</span><span class="op">)</span> <span class="op">-</span> <span class="va">last_active</span>,
     contributor <span class="op">=</span> <span class="fu"><a href="https://glue.tidyverse.org/reference/glue.html">glue</a></span><span class="op">(</span><span class="st">'&lt;img src="{avatar}" alt="" height="30"&gt; {author}'</span><span class="op">)</span>,
-    blog <span class="op">=</span> <span class="fu">case_when</span><span class="op">(</span>
+    blog <span class="op">=</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/case_when.html">case_when</a></span><span class="op">(</span>
       <span class="va">blog</span> <span class="op">==</span> <span class="st">""</span> <span class="op">~</span> <span class="st">""</span>,
       <span class="cn">TRUE</span> <span class="op">~</span> <span class="fu"><a href="https://rdrr.io/r/base/character.html">as.character</a></span><span class="op">(</span><span class="fu"><a href="https://glue.tidyverse.org/reference/glue.html">glue</a></span><span class="op">(</span><span class="st">'&lt;a href="{blog}"&gt;link&lt;/a&gt;'</span><span class="op">)</span><span class="op">)</span>
       <span class="op">)</span>
-    <span class="op">)</span> <span class="op">%&gt;%</span>
-  <span class="fu">select</span><span class="op">(</span><span class="va">contributor</span>,<span class="va">commits</span>,<span class="va">name</span>,<span class="va">last_active</span>,<span class="va">company</span>,<span class="va">location</span>,<span class="va">blog</span><span class="op">)</span> <span class="op">%&gt;%</span>
+    <span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span>
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="va">contributor</span>,<span class="va">commits</span>,<span class="va">name</span>,<span class="va">last_active</span>,<span class="va">company</span>,<span class="va">location</span>,<span class="va">blog</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span>
   <span class="fu">knitr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html">kable</a></span><span class="op">(</span>
     
   <span class="op">)</span></code></pre></div>
@@ -582,13 +582,13 @@
   repo <span class="op">=</span> <span class="st">"GithubMetrics"</span>,
   org <span class="op">=</span> <span class="st">"OpenPharma"</span>,
   file <span class="op">=</span> <span class="st">"DESCRIPTION"</span>
-<span class="op">)</span> <span class="op">%&gt;%</span>
+<span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span>
   <span class="co"># format the description</span>
   <span class="fu">desc</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/desc/man/desc.html">desc</a></span><span class="op">(</span>text <span class="op">=</span> <span class="va">.</span><span class="op">)</span>
 
 <span class="co"># Print it</span>
-<span class="va">desc_formatted</span><span class="op">$</span><span class="fu">get</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Package"</span>,<span class="st">"Title"</span>,<span class="st">"Version"</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span>
-  <span class="fu">tibble</span><span class="fu">::</span><span class="fu"><a href="https://tibble.tidyverse.org/reference/enframe.html">enframe</a></span><span class="op">(</span><span class="op">)</span> <span class="op">%&gt;%</span>
+<span class="va">desc_formatted</span><span class="op">$</span><span class="fu">get</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Package"</span>,<span class="st">"Title"</span>,<span class="st">"Version"</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span>
+  <span class="fu">tibble</span><span class="fu">::</span><span class="fu"><a href="https://tibble.tidyverse.org/reference/enframe.html">enframe</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span>
   <span class="fu">knitr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html">kable</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
 <table class="table">
 <thead><tr class="header">
@@ -618,7 +618,7 @@
 <span class="op">)</span>
 <span class="co">#&gt; Pulling files in latest commit from 13 repos</span>
 
-<span class="fu">glimpse</span><span class="op">(</span><span class="va">repo_files</span><span class="op">)</span>
+<span class="fu"><a href="https://pillar.r-lib.org/reference/glimpse.html">glimpse</a></span><span class="op">(</span><span class="va">repo_files</span><span class="op">)</span>
 <span class="co">#&gt; Rows: 1,311</span>
 <span class="co">#&gt; Columns: 6</span>
 <span class="co">#&gt; $ repo       &lt;chr&gt; "openpharma/visR-docs", "openpharma/visR-docs", "openpharm…</span>
@@ -628,13 +628,13 @@
 <span class="co">#&gt; $ extension  &lt;chr&gt; "md", "docs", "html", "html", "html", "html", "png", "png"…</span>
 <span class="co">#&gt; $ lang       &lt;chr&gt; "Markdown", NA, "HTML", "HTML", "HTML", "HTML", NA, NA, NA…</span>
 
-<span class="va">repo_files</span> <span class="op">%&gt;%</span>
-  <span class="fu">group_by</span><span class="op">(</span><span class="va">repo</span><span class="op">)</span> <span class="op">%&gt;%</span>
-  <span class="fu">summarise</span><span class="op">(</span>
-    Files <span class="op">=</span> <span class="fu">n</span><span class="op">(</span><span class="op">)</span>,
-    `R files` <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="va">lang</span> <span class="op">%in%</span> <span class="st">"R"</span><span class="op">)</span>,
-    `Python files` <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="va">lang</span> <span class="op">%in%</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Python"</span>,<span class="st">"Jupyter Notebook"</span><span class="op">)</span><span class="op">)</span>
-  <span class="op">)</span> <span class="op">%&gt;%</span> <span class="fu">knitr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html">kable</a></span><span class="op">(</span>
+<span class="va">repo_files</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span>
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span><span class="op">(</span><span class="va">repo</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span>
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarise</a></span><span class="op">(</span>
+    Files <span class="op">=</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/context.html">n</a></span><span class="op">(</span><span class="op">)</span>,
+    `R files` <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="va">lang</span> <span class="op"><a href="https://rdrr.io/r/base/match.html">%in%</a></span> <span class="st">"R"</span><span class="op">)</span>,
+    `Python files` <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="va">lang</span> <span class="op"><a href="https://rdrr.io/r/base/match.html">%in%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Python"</span>,<span class="st">"Jupyter Notebook"</span><span class="op">)</span><span class="op">)</span>
+  <span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="fu">knitr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html">kable</a></span><span class="op">(</span>
     caption <span class="op">=</span> <span class="st">"Types of files in the organisation"</span>
   <span class="op">)</span></code></pre></div>
 <table class="table">
@@ -732,7 +732,7 @@
   organisation <span class="op">=</span> <span class="va">organisation</span>
 <span class="op">)</span>
 
-<span class="fu">glimpse</span><span class="op">(</span><span class="va">results</span><span class="op">)</span>
+<span class="fu"><a href="https://pillar.r-lib.org/reference/glimpse.html">glimpse</a></span><span class="op">(</span><span class="va">results</span><span class="op">)</span>
 <span class="co">#&gt; Rows: 12</span>
 <span class="co">#&gt; Columns: 7</span>
 <span class="co">#&gt; $ full_name &lt;chr&gt; "openpharma/GithubMetrics", "openpharma/GithubMetrics", "op…</span>
@@ -760,11 +760,11 @@
   <span class="kw">if</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/NA.html">is.na</a></span><span class="op">(</span><span class="va">results</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span>
     <span class="va">results</span> <span class="op">&lt;-</span> <span class="kw"><a href="https://rdrr.io/r/base/function.html">return</a></span><span class="op">(</span><span class="op">)</span>
   <span class="op">}</span>
-  <span class="va">results</span> <span class="op">%&gt;%</span> 
-    <span class="fu">mutate</span><span class="op">(</span>Package <span class="op">=</span> <span class="va">x</span>, Organisation <span class="op">=</span> <span class="va">org</span><span class="op">)</span> <span class="op">%&gt;%</span>
-    <span class="fu">group_by</span><span class="op">(</span><span class="va">Organisation</span>,<span class="va">Package</span><span class="op">)</span> <span class="op">%&gt;%</span>
-    <span class="fu">summarise</span><span class="op">(</span>
-      Repos <span class="op">=</span> <span class="fu">n_distinct</span><span class="op">(</span><span class="va">full_name</span><span class="op">)</span>, .groups <span class="op">=</span> <span class="st">"drop"</span>
+  <span class="va">results</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> 
+    <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>Package <span class="op">=</span> <span class="va">x</span>, Organisation <span class="op">=</span> <span class="va">org</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span>
+    <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span><span class="op">(</span><span class="va">Organisation</span>,<span class="va">Package</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span>
+    <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarise</a></span><span class="op">(</span>
+      Repos <span class="op">=</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/n_distinct.html">n_distinct</a></span><span class="op">(</span><span class="va">full_name</span><span class="op">)</span>, .groups <span class="op">=</span> <span class="st">"drop"</span>
     <span class="op">)</span>
 <span class="op">}</span>
 
@@ -772,29 +772,29 @@
   <span class="st">"tidyverse"</span>,<span class="st">"pkgdown"</span>,<span class="st">"dplyr"</span>,<span class="st">"data.table"</span>
   <span class="op">)</span>
 
-<span class="va">package_use</span> <span class="op">&lt;-</span> <span class="fu">bind_rows</span><span class="op">(</span>
-  <span class="va">packages</span> <span class="op">%&gt;%</span>
-    <span class="fu">map_df</span><span class="op">(</span>
+<span class="va">package_use</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/bind.html">bind_rows</a></span><span class="op">(</span>
+  <span class="va">packages</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span>
+    <span class="fu"><a href="https://purrr.tidyverse.org/reference/map.html">map_df</a></span><span class="op">(</span>
       <span class="va">helper_gh_repo_search</span>, org <span class="op">=</span> <span class="st">"PHCAnalytics"</span>
     <span class="op">)</span>,
-  <span class="va">packages</span> <span class="op">%&gt;%</span>
-    <span class="fu">map_df</span><span class="op">(</span>
+  <span class="va">packages</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span>
+    <span class="fu"><a href="https://purrr.tidyverse.org/reference/map.html">map_df</a></span><span class="op">(</span>
       <span class="va">helper_gh_repo_search</span>, org <span class="op">=</span> <span class="st">"openpharma"</span>
     <span class="op">)</span>,
-  <span class="va">packages</span> <span class="op">%&gt;%</span>
-    <span class="fu">map_df</span><span class="op">(</span>
+  <span class="va">packages</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span>
+    <span class="fu"><a href="https://purrr.tidyverse.org/reference/map.html">map_df</a></span><span class="op">(</span>
       <span class="va">helper_gh_repo_search</span>, org <span class="op">=</span> <span class="st">"AstraZeneca"</span>
     <span class="op">)</span>,
-  <span class="va">packages</span> <span class="op">%&gt;%</span>
-    <span class="fu">map_df</span><span class="op">(</span>
+  <span class="va">packages</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span>
+    <span class="fu"><a href="https://purrr.tidyverse.org/reference/map.html">map_df</a></span><span class="op">(</span>
       <span class="va">helper_gh_repo_search</span>, org <span class="op">=</span> <span class="st">"Roche"</span>
     <span class="op">)</span>,
-  <span class="va">packages</span> <span class="op">%&gt;%</span>
-    <span class="fu">map_df</span><span class="op">(</span>
+  <span class="va">packages</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span>
+    <span class="fu"><a href="https://purrr.tidyverse.org/reference/map.html">map_df</a></span><span class="op">(</span>
       <span class="va">helper_gh_repo_search</span>, org <span class="op">=</span> <span class="st">"Genentech"</span>
     <span class="op">)</span>,
-  <span class="va">packages</span> <span class="op">%&gt;%</span>
-    <span class="fu">map_df</span><span class="op">(</span>
+  <span class="va">packages</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span>
+    <span class="fu"><a href="https://purrr.tidyverse.org/reference/map.html">map_df</a></span><span class="op">(</span>
       <span class="va">helper_gh_repo_search</span>, org <span class="op">=</span> <span class="st">"Novartis"</span>
     <span class="op">)</span>
 <span class="op">)</span>
@@ -808,10 +808,10 @@
 <span class="co">#&gt; query = 'data.table in:file  user:AstraZeneca'</span>
 
 
-<span class="va">package_use</span> <span class="op">%&gt;%</span>
-  <span class="fu">pivot_wider</span><span class="op">(</span>names_from <span class="op">=</span> <span class="st">"Package"</span>, values_from <span class="op">=</span> <span class="st">"Repos"</span><span class="op">)</span> <span class="op">%&gt;%</span>
-  <span class="fu">mutate</span><span class="op">(</span>Total <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/colSums.html">rowSums</a></span><span class="op">(</span><span class="va">.</span><span class="op">[</span>,<span class="op">-</span><span class="fl">1</span><span class="op">]</span>, na.rm <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span>
-  <span class="fu">arrange</span><span class="op">(</span><span class="op">-</span><span class="va">Total</span><span class="op">)</span> <span class="op">%&gt;%</span>
+<span class="va">package_use</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span>
+  <span class="fu"><a href="https://tidyr.tidyverse.org/reference/pivot_wider.html">pivot_wider</a></span><span class="op">(</span>names_from <span class="op">=</span> <span class="st">"Package"</span>, values_from <span class="op">=</span> <span class="st">"Repos"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span>
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>Total <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/colSums.html">rowSums</a></span><span class="op">(</span><span class="va">.</span><span class="op">[</span>,<span class="op">-</span><span class="fl">1</span><span class="op">]</span>, na.rm <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span>
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/arrange.html">arrange</a></span><span class="op">(</span><span class="op">-</span><span class="va">Total</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span>
   <span class="fu">knitr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html">kable</a></span><span class="op">(</span>
     caption <span class="op">=</span> <span class="st">"Package use detected within repositaries in Pharma orgs"</span>
   <span class="op">)</span></code></pre></div>

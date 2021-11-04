@@ -72,7 +72,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">GithubMetrics</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.2.3</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.0</span>
       </span>
     </div>
 
@@ -119,6 +119,7 @@
   repo <span class='op'>=</span> <span class='st'>"GithubMetrics"</span>,
   org <span class='op'>=</span> <span class='st'>"OpenPharma"</span>,
   file <span class='op'>=</span> <span class='st'>"DESCRIPTION"</span>,
+  return <span class='op'>=</span> <span class='st'>"file"</span>,
   <span class='va'>...</span>
 <span class='op'>)</span></pre>
 
@@ -136,6 +137,10 @@
     <tr>
       <th>file</th>
       <td><p>The filename (or path with filename if not in root)</p></td>
+    </tr>
+    <tr>
+      <th>return</th>
+      <td><p>Defaults to returning file. Other option is <code>"sha"</code></p></td>
     </tr>
     <tr>
       <th>...</th>
