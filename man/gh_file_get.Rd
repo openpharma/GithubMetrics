@@ -8,6 +8,7 @@ gh_file_get(
   repo = "GithubMetrics",
   org = "OpenPharma",
   file = "DESCRIPTION",
+  return = "file",
   ...
 )
 }
@@ -17,6 +18,8 @@ gh_file_get(
 \item{org}{The Github organisation name}
 
 \item{file}{The filename (or path with filename if not in root)}
+
+\item{return}{Defaults to returning file. Other option is \code{"sha"}}
 
 \item{...}{Pass down options to \code{gh::gh()}}
 }
