@@ -48,12 +48,26 @@ gh_commits_get <- function(
       ... = ...
       ) %>% purrr::compact() %>% dplyr::bind_rows()
 
-  # IF MISSING - haven't set up email
-  commits <- commits %>%
-    dplyr::mutate(
-      author = ifelse(is.na(author),".gitconfig missing email",author)
-    )
+  message(
+    dplyr::glimpse(commits)
+  )
 
+  # Give back empty dataframe if null
+  # if (is.null(commits)){
+  #   empty_table <- tibble::tibble(
+  #     full_name = character(),
+  #     author = character(),
+  #     datetime = character(),
+  #     sha = character(),
+  #     commit_message = character()
+  #   )
+  #   return(empty_table)
+  # } else {
+  #   commits <- commits %>%
+  #     dplyr::mutate(
+  #       author = ifelse(is.na(author),".gitconfig missing email",author)
+  #     )
+  # }
   commits
 }
 
