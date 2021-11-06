@@ -19,11 +19,10 @@ Imports:
     tibble,
     base64enc,
     lubridate
-RoxygenNote: 7.1.1
+RoxygenNote: 7.1.2
 Suggests: 
     covr,
     testthat (>= 3.0.0),
     vcr,
     tidyverse
 Config/testthat/edition: 3
-
