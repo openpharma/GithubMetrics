@@ -32,12 +32,13 @@ gh_issues_labels_get <- function(
   # Loop through full names
   labels <- NULL
   for (i_repo in full_names) {
-    i_issues <- gh::gh("GET /repos/:full_name/issues?state=open",
+    i_issues <- gh::gh("GET /repos/:full_name/issues?state=:state",
                        full_name = i_repo,
                        since = since,
-                       .limit = Inf #,
-                       #.progress = FALSE,
-                       #...
+                       .limit = Inf,
+                       state = state ,
+                       .progress = FALSE,
+                       ...
     )
     urls <- i_issues %>%
       purrr::map_chr(c("html_url"), .null = NA_character_)
