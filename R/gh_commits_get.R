@@ -48,10 +48,6 @@ gh_commits_get <- function(
       ... = ...
       ) %>% purrr::compact() %>% dplyr::bind_rows()
 
-  message(
-    dplyr::glimpse(commits)
-  )
-
   # Give back empty dataframe if null
   # if (is.null(commits)){
   #   empty_table <- tibble::tibble(
