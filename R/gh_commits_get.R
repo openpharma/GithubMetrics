@@ -41,9 +41,11 @@ gh_commits_get <- function(
   #   total = length(full_names)
   # )
 
+  possibly_repo_commits <- purrr::possibly(repo_commits, otherwise = NULL)
+
   commits <- full_names %>%
     purrr::map(
-      repo_commits, since = from_date,
+      possibly_repo_commits, since = from_date,
       .pb = pb,
       ... = ...
       ) %>% purrr::compact() %>% dplyr::bind_rows()
