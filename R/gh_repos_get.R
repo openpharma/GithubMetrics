@@ -1,4 +1,4 @@
-#' Get org access
+#' Get org repos
 #'
 #' @param org Which Github org are you looking for
 #' @param ... Pass down options to \code{gh::gh()}
@@ -20,8 +20,6 @@ gh_repos_get <- function(
       .send_headers = NULL,...
     )$name
 
-  author_name
-
   # user orgs
   user_orgs <-
     gh::gh("/user/orgs",
@@ -42,11 +40,21 @@ gh_repos_get <- function(
 
   # what repos are in that org
   org_repos <-
-    gh::gh("/orgs/:org/repos",
+    try(
+      gh::gh("/orgs/:org/repos",
            org = org,
            .limit = Inf,
            .progress = FALSE,
            ...)
+    )
+
+  if (inherits(org_repos, "try-error")) {
+    org_repos <- gh::gh("/users/:org/repos",
+           org = org,
+           .limit = Inf,
+           .progress = FALSE,
+           ...)
+  }
 
 
   org_repos

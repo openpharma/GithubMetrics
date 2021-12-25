@@ -1,7 +1,7 @@
 Package: GithubMetrics
 Type: Package
 Title: Quickly Get Key Metrics on Github Repositories
-Version: 0.3.3
+Version: 0.3.4
 Authors@R: c(person("James", "Black", role = c("aut", "cre"),
                      email = "james@epijim.uk"))
 Description: The aim of this package is to provide a wrapper on 'gh' to quickly get you key 'Github' metadata you need.

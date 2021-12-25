@@ -2,7 +2,7 @@
 % Please edit documentation in R/gh_repos_get.R
 \name{gh_repos_get}
 \alias{gh_repos_get}
-\title{Get org access}
+\title{Get org repos}
 \usage{
 gh_repos_get(org, ...)
 }
@@ -15,5 +15,5 @@ gh_repos_get(org, ...)
 Returns gh::gh_response object which contains repos in the org
 }
 \description{
-Get org access
+Get org repos
 }
