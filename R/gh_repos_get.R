@@ -28,16 +28,6 @@ gh_repos_get <- function(
            ...
     )
 
-  if (!org %in% (user_orgs %>% purrr::map_chr("login"))) {
-
-    pander::pander(paste0(
-      "> <strong style = 'color: red;'>WARNING!</strong> User `",
-      author_name,
-      "` DOES NOT have access to `", org, "` GitHub organization.\n"
-    ))
-
-  }
-
   # what repos are in that org
   org_repos <-
     try(
@@ -45,7 +35,8 @@ gh_repos_get <- function(
            org = org,
            .limit = Inf,
            .progress = FALSE,
-           ...)
+           ...),
+      silent = TRUE
     )
 
   if (inherits(org_repos, "try-error")) {
