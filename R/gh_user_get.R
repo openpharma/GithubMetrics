@@ -10,6 +10,7 @@
 #'
 gh_user_get <- function(
   user,
+  verbose = FALSE,
   ...
 ) {
 
@@ -19,6 +20,7 @@ gh_user_get <- function(
     clear = FALSE, width= 60,
     total = length(user)
     )
+
 
   output <- tibble::tibble(
     username = character(),
@@ -33,8 +35,13 @@ gh_user_get <- function(
     bio = character()
   )
 
+  user <- setdiff(user,"invalid-email-address")
+
   for(i_user in user){
     if (interactive()) pb$tick()
+
+    if (verbose) message("Currently pulling ",i_user)
+
 
     i_returned <- gh::gh(
       "/users/:user",
