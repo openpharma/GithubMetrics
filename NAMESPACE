@@ -2,6 +2,7 @@
 
 export(gh_commits_get)
 export(gh_file_get)
+export(gh_issues_comments_get)
 export(gh_issues_get)
 export(gh_issues_labels_get)
 export(gh_repo_files_get)

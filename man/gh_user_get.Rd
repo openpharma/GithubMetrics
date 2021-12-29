@@ -4,7 +4,7 @@
 \alias{gh_user_get}
 \title{Get files in a repo}
 \usage{
-gh_user_get(user, ...)
+gh_user_get(user, verbose = FALSE, ...)
 }
 \arguments{
 \item{user}{Character vector with Github username (called author in their objs)}

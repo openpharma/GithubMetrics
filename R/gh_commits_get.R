@@ -97,6 +97,8 @@ repo_commits <- function(
     full_name = full_name,
     author = commits %>%
       purrr::map_chr(c("author", "login"), .null = NA_character_),
+    author_type = commits %>%
+      purrr::map_chr(c("author", "type"), .null = NA_character_),
     datetime = commits %>%
       purrr::map_chr(c("commit", "author", "date"), .null = NA_character_),
     sha = commits %>%
