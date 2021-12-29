@@ -70,9 +70,14 @@ repo_issues_comments <- function(
   }
 
   tibble::tibble(
+    full_name = full_name,
     issue_url = comments %>%
       purrr::map_chr(c("issue_url"), .null = NA_character_) %>%
       gsub("https://api.github.com/repos/","https://github.com/",x = .),
+    issue_number = comments %>%
+      purrr::map_chr(c("issue_url"), .null = NA_character_) %>%
+      gsub("https://api.github.com/repos/","https://github.com/",x = .) %>%
+      basename(),
     url = comments %>%
       purrr::map_chr(c("html_url"), .null = NA_character_),
     created = comments %>%
