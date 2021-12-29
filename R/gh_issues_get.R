@@ -88,8 +88,7 @@ repo_issues <- function(
       purrr::map_chr(c("repository_url"), .null = NA_character_) %>%
       gsub("https://api.github.com/repos/","",x = .),
     issue_number = issues %>%
-      purrr::map_chr(c("repository_url"), .null = NA_character_) %>%
-      gsub("https://api.github.com/repos/","",x = .) %>%
+      purrr::map_chr(c("html_url"), .null = NA_character_) %>%
       basename(),
     title = issues %>%
       purrr::map_chr(c("title"), .null = NA_character_),
