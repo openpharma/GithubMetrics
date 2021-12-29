@@ -23,6 +23,8 @@ Get commits for a repo
 
  \item{full_name}{org/repo}
  \item{author}{Author name}
+ \item{author_type}{Author type / relationship to repo}
+ \item{commit_email}{Email on commit}
  \item{datetime}{Date time of commit}
  \item{sha}{Unique hash - can be joined on repo_sha from \code{gh_repo_files_get()}}
  \item{commit_message}{The commit message}

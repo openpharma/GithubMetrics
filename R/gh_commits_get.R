@@ -16,6 +16,8 @@
 #'
 #'  \item{full_name}{org/repo}
 #'  \item{author}{Author name}
+#'  \item{author_type}{Author type / relationship to repo}
+#'  \item{commit_email}{Email on commit}
 #'  \item{datetime}{Date time of commit}
 #'  \item{sha}{Unique hash - can be joined on repo_sha from \code{gh_repo_files_get()}}
 #'  \item{commit_message}{The commit message}
@@ -99,6 +101,8 @@ repo_commits <- function(
       purrr::map_chr(c("author", "login"), .null = NA_character_),
     author_type = commits %>%
       purrr::map_chr(c("author", "type"), .null = NA_character_),
+    commit_email = commits %>%
+      purrr::map_chr(c("commit", "author", "email"), .null = NA_character_),
     datetime = commits %>%
       purrr::map_chr(c("commit", "author", "date"), .null = NA_character_),
     sha = commits %>%
