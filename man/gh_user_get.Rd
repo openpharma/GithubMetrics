@@ -9,6 +9,8 @@ gh_user_get(user, verbose = FALSE, ...)
 \arguments{
 \item{user}{Character vector with Github username (called author in their objs)}
 
+\item{verbose}{Print out updates on what is being pulled?}
+
 \item{...}{Pass down options to \code{gh::gh()}}
 }
 \description{

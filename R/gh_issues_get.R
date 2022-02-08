@@ -36,7 +36,7 @@ gh_issues_get <- function(
     glue::glue("Pulling issues looking back to {from_date}")
     )
 
-  pb <- dplyr::progress_estimated(length(full_names))
+  #pb <- dplyr::progress_estimated(length(full_names))
   # pb <- progress::progress_bar$new(
   #   format = "  downloading [:bar] :percent eta: :eta",
   #   clear = FALSE, width= 60,
@@ -46,7 +46,7 @@ gh_issues_get <- function(
   commits <- full_names %>%
     purrr::map(
       repo_issues, since = from_date,
-      .pb = pb,
+      #.pb = pb,
       ... = ...
       ) %>% purrr::compact() %>% dplyr::bind_rows()
 
@@ -63,13 +63,13 @@ gh_issues_get <- function(
 repo_issues <- function(
   full_name,
   since,
-  .pb = NULL,
+  #.pb = NULL,
   ...
   ) {
 
   #message("Requesting commits for ", full_name)
   #if(interactive()) message("Requesting commits for ", full_name)
-  if ((!is.null(.pb)) && inherits(.pb, "Progress") && (.pb$i < .pb$n)) .pb$tick()$print()
+  #if ((!is.null(.pb)) && inherits(.pb, "Progress") && (.pb$i < .pb$n)) .pb$tick()$print()
 
   issues <- gh::gh("GET /repos/:full_name/issues?state=all",
                     full_name = full_name,

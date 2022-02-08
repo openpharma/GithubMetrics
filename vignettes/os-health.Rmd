@@ -1,0 +1,128 @@
+---
+title: "os-health"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{os-health}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+```{r setup}
+library(dplyr)
+library(GithubMetrics)
+```
+
+## Intro
+
+The following vignette shows how the OS Health is calculated, with the aim of 
+capturing the current vibrancy of the packages community, and their activity on 
+the repo. 
+
+It is important to note that 'OS Health' is not equivalent to metrics 
+assessed in `riskmetric`. An example being a stable and mature statistical R 
+package that could be orphaned, or stable enough activity has largely ended. 
+In terms of 'OS Health', the developer community is not active - but 
+the package itself could still be robust and meeting all it's intended use 
+cases (OS Health and the scope of `riskmetric` would overlap though if 
+the package has stale open issues that are being ignored).
+
+> Note - in the 
+context of openpharma.github.io and the pharmaverse.org, we may deprecate using 
+this package and move to GrimoreLab tooling.
+
+## Get data
+
+```{r, eval = FALSE}
+# repos
+  repos <- c(
+    "Roche/crmPack" ,
+    "Roche/rtables",
+    "openpharma/visR",
+    "openpharma/GithubMetrics",
+    "pharmaverse/admiral"
+  )
+
+# commits
+  commits <- gh_commits_get(
+    repos,
+    days_back = 365*10
+  )
+
+# issues
+  issues <- gh_issues_get(repos, days_back =  365*10)
+```
+
+## Create metrics
+
+```{r}
+issues_enriched <- issues %>%
+  mutate(
+    days_open = as.numeric(Sys.Date() - as.Date(created)),
+    days_no_activity = as.numeric(Sys.Date() - as.Date(updated))
+  ) %>%
+  select(
+    full_name, state, days_open, days_no_activity
+  )
+
+commits_enriched <- commits %>%
+  mutate(
+    date = as.Date(datetime)
+  ) %>%
+  select(full_name, date, author)
+
+scoring <- tibble(
+  full_name = unique(commits$full_name)
+  ) %>%
+  left_join(
+    gh_metric_issues(issues_enriched), by = "full_name"
+  ) %>%
+  left_join(
+    gh_metric_commits_days_since_commit(commits_enriched), by = "full_name"
+  ) %>%
+  left_join(
+    gh_metric_commits_prepost_midpoint(commits_enriched), by = "full_name"
+  ) %>%
+  left_join(
+    gh_metric_commits_authors_ever(commits_enriched), by = "full_name"
+  ) %>%
+  left_join(
+    gh_metric_commits_authors_prepost_midpoint(commits_enriched), by = "full_name"
+  ) %>%
+  gh_score()
+```
+
+## Results
+
+These results were generated at `r Sys.time()`.
+
+```{r}
+scoring %>% select(full_name, score) %>%
+  knitr::kable(
+    caption = "OS Health Score"
+  )
+```
+
+### Negative factors lowering OS health.
+
+```{r, results='asis'}
+for (i in 1:nrow(scoring)){
+  cat(glue::glue("
+
+*{scoring[i,]$full_name}*
+    
+* Score is {scoring[i,]$score}  
+{scoring[i,]$warnings}
+    
+    
+  "))
+}
+```
+
+

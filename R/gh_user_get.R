@@ -1,6 +1,7 @@
 #' Get files in a repo
 #'
 #' @param user Character vector with Github username (called author in their objs)
+#' @param verbose Print out updates on what is being pulled?
 #' @param ... Pass down options to \code{gh::gh()}
 #'
 #' @importFrom magrittr "%>%"

@@ -4,7 +4,7 @@
 #' as no pagination in place.
 #'
 #' @param user The github username
-#' @param ... Pass down to \code{gh}
+#' @param token Github token
 #'
 #' @importFrom magrittr "%>%"
 #'
