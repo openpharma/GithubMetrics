@@ -10,6 +10,12 @@
     <loc>/LICENSE.html</loc>
   </url>
   <url>
+    <loc>/articles/index.html</loc>
+  </url>
+  <url>
+    <loc>/articles/os-health.html</loc>
+  </url>
+  <url>
     <loc>/authors.html</loc>
   </url>
   <url>
@@ -20,6 +26,9 @@
   </url>
   <url>
     <loc>/reference/GithubMetrics-package.html</loc>
+  </url>
+  <url>
+    <loc>/reference/commits.html</loc>
   </url>
   <url>
     <loc>/reference/gh_commits_get.html</loc>
@@ -40,6 +49,21 @@
     <loc>/reference/gh_issues_labels_get.html</loc>
   </url>
   <url>
+    <loc>/reference/gh_metric_commits_authors_ever.html</loc>
+  </url>
+  <url>
+    <loc>/reference/gh_metric_commits_authors_prepost_midpoint.html</loc>
+  </url>
+  <url>
+    <loc>/reference/gh_metric_commits_days_since_commit.html</loc>
+  </url>
+  <url>
+    <loc>/reference/gh_metric_commits_prepost_midpoint.html</loc>
+  </url>
+  <url>
+    <loc>/reference/gh_metric_issues.html</loc>
+  </url>
+  <url>
     <loc>/reference/gh_repo_files_get.html</loc>
   </url>
   <url>
@@ -52,6 +76,9 @@
     <loc>/reference/gh_repos_get.html</loc>
   </url>
   <url>
+    <loc>/reference/gh_score.html</loc>
+  </url>
+  <url>
     <loc>/reference/gh_user_event_get.html</loc>
   </url>
   <url>
@@ -62,5 +89,8 @@
   </url>
   <url>
     <loc>/reference/index.html</loc>
+  </url>
+  <url>
+    <loc>/reference/issues.html</loc>
   </url>
 </urlset>
