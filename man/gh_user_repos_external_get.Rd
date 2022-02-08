@@ -9,7 +9,7 @@ gh_user_repos_external_get(user, token = Sys.getenv("GITHUB_PAT"))
 \arguments{
 \item{user}{The github username}
 
-\item{...}{Pass down to \code{gh}}
+\item{token}{Github token}
 }
 \description{
 It will return a vector or repos. It ONLY pulls first 100 currently
