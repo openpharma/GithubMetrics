@@ -20,7 +20,7 @@ Imports:
     base64enc,
     lubridate,
     ghql
-RoxygenNote: 7.1.2
+RoxygenNote: 7.2.1
 Suggests: 
     covr,
     testthat (>= 3.0.0),
