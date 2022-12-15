@@ -21,11 +21,11 @@
 #' @returns A dataframe with number of commits per week for last 52 weeks.
 
 gh_weekly_commits_dt <- function(
-    fullnames,
+    full_names,
     ...
 ) {
 
-  gh_weekly_commits_stats <- gh_weekly_commits_get(fullnames,
+  gh_weekly_commits_stats <- gh_weekly_commits_get(full_names,
                                                    ...)
 
   commits_weekly_df <- purrr::map(gh_weekly_commits_stats, function(x){
