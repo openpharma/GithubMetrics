@@ -3,6 +3,8 @@
 
 # GithubMetrics
 
+It's now recomended to use this package instead: https://github.com/r-world-devs/GitStats
+
 <!-- badges: start -->
 
 [![R-CMD-check](https://github.com/openpharma/GithubMetrics/workflows/R-CMD-check/badge.svg)](https://github.com/openpharma/GithubMetrics/actions)
